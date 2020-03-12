@@ -58,6 +58,8 @@ export default {
     .search-input {
       height: 3.2rem;
       width: 33rem;
+      font-family: $fontFamily;
+      font-size: 1.6rem;
       background: $dark;
       color: $white;
       border: none;
