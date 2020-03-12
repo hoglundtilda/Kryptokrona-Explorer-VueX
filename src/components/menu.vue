@@ -32,7 +32,7 @@ export default {
       this.$router.push("/");
     },
     checkTXN() {
-      this.$router.push("/checkTXN");
+      this.$router.push("/check_txn");
     }
   }
 };

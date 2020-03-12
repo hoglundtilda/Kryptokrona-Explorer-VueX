@@ -100,6 +100,10 @@ export default {
         font-size: 1.8rem;
       }
     }
+
+    :hover {
+      background: $dark;
+    }
   }
 }
 </style>

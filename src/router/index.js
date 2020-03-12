@@ -13,7 +13,7 @@ const routes = [
     component: Explorer
   },
   {
-    path: "/checkTXN",
+    path: "/check_txn",
     name: "CheckTXN",
     component: CheckTXN
   }

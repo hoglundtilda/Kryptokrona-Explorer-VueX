@@ -56,6 +56,9 @@
         </li>
       </section>
     </section>
+    <div class="load-more">
+      <button class="btn">Load More</button>
+    </div>
   </div>
 </template>
 
@@ -203,6 +206,16 @@ export default {
         grid-template-columns: 12rem 12rem 65rem 18rem 10rem 20rem;
         margin: 0.8rem 0;
       }
+    }
+  }
+
+  .load-more {
+    display: flex;
+    align-self: center;
+    margin: 1.8rem 0;
+
+    .btn {
+      padding: 1rem;
     }
   }
 }
