@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <Header class="header" />
-
     <Stats class="stats" />
     <Chart class="chart" />
     <Transaction-Pool class="transaction-pool" />
@@ -13,7 +12,6 @@
 import Header from "../components/header";
 import Stats from "../components/stats";
 import Chart from "../components/chart";
-
 import TransactionPool from "../components/transactionPool";
 import RecentBlocks from "../components/recentBlocks";
 

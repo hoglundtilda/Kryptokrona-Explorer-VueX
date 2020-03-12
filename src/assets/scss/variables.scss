@@ -1,6 +1,7 @@
 $white: #d1d0d0;
 $black: #171416;
 $dark: #272527;
+$grey: #383638;
 $orange: #e9832a;
 $blue: #22c7fc;
 
@@ -9,10 +10,11 @@ $boxShadow: 2px 2px 20px rgba(0, 0, 0, 0.75);
 $fontFamily: "Share Tech Mono", monospace;
 
 /* Header */
-$searchBTNbg: $orange;
-$searchBTN: $dark;
+$searchBTNbg: $grey;
+$searchBTN: $white;
 $placeholder: $white;
 $headerBorder: $white;
+$menuHover: $grey;
 
 /* Table headers */
 $tableHeader: $dark;
@@ -30,11 +32,12 @@ $statsDark: $white;
 
 /* Hash links */
 $hashLinks: $white;
-$hashHover: $orange;
+$hashHover: $grey;
 
 /* Recent blocks */
-$blockBtn: $orange;
-$btnText: $dark;
-$btnIcon: $dark;
+$blockBtn: $grey;
+$btnText: $white;
+$btnIcon: $white;
 $btnHover: $dark;
-$textHover: $orange;
+$textHover: $grey;
+$no: $white;

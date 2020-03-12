@@ -44,7 +44,7 @@
     }
 
     a:hover {
-      color: $orange;
+      color: $menuHover;
     }
 
     i,

@@ -16,7 +16,7 @@
 
 #app {
   max-width: 100vw;
-
+  padding: 0 10%;
   height: auto;
   display: flex;
   justify-content: center;

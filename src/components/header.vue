@@ -70,6 +70,8 @@ export default {
       font-size: 1.2rem;
       opacity: 0.3;
       color: $placeholder;
+      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
     }
 
     .search-btn {
