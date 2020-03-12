@@ -83,7 +83,7 @@ export default {
       cursor: pointer;
 
       i {
-        font-size: 2.2rem;
+        font-size: 1.8rem;
       }
     }
   }
