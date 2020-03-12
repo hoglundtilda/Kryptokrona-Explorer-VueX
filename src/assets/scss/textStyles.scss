@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap");
+
+/* Table Header text-style */
+.table-header {
+  i {
+    color: $header-Icon;
+    font-size: 1.8rem;
+  }
+  h2 {
+    color: $header-H2;
+    font-size: 2.2rem;
+    font-weight: 500;
+  }
+  .range {
+    font-size: 1.8rem;
+    color: $viewingRange;
+    opacity: 0.5;
+  }
+}
+/* -------------------- */
+
+/* Stats p and icon element */
+.stats {
+  p {
+    color: $stats-P;
+    font-size: 1.8rem;
+  }
+  i {
+    color: $stats-I;
+    font-size: 1.8rem;
+  }
+}
+/* -------------------- */
+
+/* Hash links */
+.hash-a {
+  text-decoration: none;
+  font-size: 1.8rem;
+  color: $hashLinks;
+}
+.hash-a:hover {
+  color: $hashHover;
+}
+.stats-dark {
+  font-size: 1.8rem;
+  color: $statsDark;
+  opacity: 0.5;
+}
+/* -------------------- */
+
+/* recent blocks */
+
+.numb {
+  background: $blockBtn;
+  border-left: 0.5px solid $dark;
+  p {
+    color: $dark;
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+}
+.btn {
+  display: flex;
+  border: none;
+  border-right: 0.5px solid $dark;
+  border-left: 0.5px solid $dark;
+
+  background: $blockBtn;
+  color: $btnText;
+  font-family: $fontFamily;
+  font-size: 1.8rem;
+  font-weight: 600;
+  i {
+    color: $btnIcon;
+    font-size: 1.8rem;
+  }
+}
+
+.btn:hover {
+  background: $btnHover;
+  color: $textHover;
+  i {
+    color: $textHover;
+  }
+}
+/* -------------------- */
+
+/* info texts */
+.info-text {
+  background: $dark;
+  color: $white;
+  p {
+    font-size: 1.6rem;
+  }
+}
