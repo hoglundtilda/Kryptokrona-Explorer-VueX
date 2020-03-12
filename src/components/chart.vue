@@ -1,7 +1,7 @@
 <template>
   <div class="table">
     <section class="table-header">
-      <i class="fas fa-chart-bar"></i>
+      <i class="fas fa-chart-area"></i>
       <h2>Chart</h2>
       <div @mouseenter="show = true" @mouseleave="show = false" class="info">
         <div v-if="show" class="info-text">
