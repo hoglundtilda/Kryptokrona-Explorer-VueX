@@ -1,14 +1,21 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Explorer from "../views/Explorer.vue";
+import CheckTXN from "../views/CheckTXN.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
+    //default page
     path: "/",
-    name: "Home",
-    component: Home
+    name: "Explorer",
+    component: Explorer
+  },
+  {
+    path: "/checkTXN",
+    name: "CheckTXN",
+    component: CheckTXN
   }
 ];
 

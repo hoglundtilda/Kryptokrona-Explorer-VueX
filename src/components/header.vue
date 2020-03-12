@@ -1,26 +1,30 @@
 <template>
-  <div class="header">
-    <div class="img">
-      <img src="../assets/logo-text-light-new.svg" alt="kryptokrona logo" />
+  <fixed-header>
+    <div class="header">
+      <div class="img">
+        <img src="../assets/logo-text-light-new.svg" alt="kryptokrona logo" />
+      </div>
+      <Menu class="menu" />
+      <div class="search">
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search by block height/hash, transaction hash, payment id"
+        />
+        <button class="search-btn">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
     </div>
-    <Menu class="menu" />
-    <div class="search">
-      <input
-        type="text"
-        class="search-input"
-        placeholder="Search by block height/hash, transaction hash, payment id"
-      />
-      <button class="search-btn">
-        <i class="fas fa-search"></i>
-      </button>
-    </div>
-  </div>
+  </fixed-header>
 </template>
 
 <script>
+import FixedHeader from "vue-fixed-header";
 import Menu from "./menu.vue";
 export default {
   components: {
+    FixedHeader,
     Menu
   }
 };
@@ -29,13 +33,23 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/scss/variables.scss";
 
+.header.vue-fixed-header--isFixed {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  background: $black;
+  padding: 0 10%;
+  border: none;
+  box-shadow: $boxShadow;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 8rem;
-  border-bottom: 2px solid $headerBorder;
 
   .img {
     width: 20%;

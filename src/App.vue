@@ -14,6 +14,10 @@
   font-size: 10px;
 }
 
+html {
+  background: $black;
+}
+
 #app {
   max-width: 100vw;
   padding: 0 10%;

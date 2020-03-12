@@ -64,8 +64,8 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/scss/variables.scss";
-@import "../assets/scss/textStyles.scss";
+@import "../../assets/scss/variables.scss";
+@import "../../assets/scss/textStyles.scss";
 
 .table {
   display: flex;

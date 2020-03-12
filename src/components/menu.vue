@@ -1,29 +1,42 @@
 <template>
   <div class="menu">
     <nav>
-      <li>
-        <a href>
+      <li @click="explorer">
+        <a>
           <i class="fas fa-cubes"></i>Block Explorer
         </a>
       </li>
-      <li>
-        <a href>
+      <li @click="checkTXN">
+        <a>
           <i class="fas fa-exchange-alt"></i>Check TXNs
         </a>
       </li>
       <li>
-        <a href>
+        <a>
           <i class="fas fa-gavel"></i>Pools
         </a>
       </li>
       <li>
-        <a href>
+        <a>
           <span class="apiIcon">&#60;/&#62;</span>API
         </a>
       </li>
     </nav>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    explorer() {
+      this.$router.push("/");
+    },
+    checkTXN() {
+      this.$router.push("/checkTXN");
+    }
+  }
+};
+</script>
 
 <style lang="scss" scoped>
 @import "../assets/scss/variables.scss";
@@ -44,6 +57,7 @@
     }
 
     a:hover {
+      cursor: pointer;
       color: $menuHover;
       opacity: 0.5;
     }

@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="explorer">
     <Header class="header" />
     <Stats class="stats" />
     <Chart class="chart" />
@@ -10,13 +10,13 @@
 
 <script>
 import Header from "../components/header";
-import Stats from "../components/stats";
-import Chart from "../components/chart";
-import TransactionPool from "../components/transactionPool";
-import RecentBlocks from "../components/recentBlocks";
+import Stats from "../components/explorer/stats";
+import Chart from "../components/explorer/chart";
+import TransactionPool from "../components/explorer/transactionPool";
+import RecentBlocks from "../components/explorer/recentBlocks";
 
 export default {
-  name: "Home",
+  name: "Explorer",
   components: { Header, Stats, Chart, TransactionPool, RecentBlocks }
 };
 </script>
@@ -24,8 +24,9 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/scss/variables.scss";
 
-.home {
+.explorer {
   display: grid;
+  width: 100%;
   column-gap: 2rem;
   row-gap: 2rem;
   grid-template-areas: "head head" "stats chart" "transPool transPool" "recentBlocks recentBlocks";
