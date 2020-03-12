@@ -38,13 +38,14 @@
     list-style: none;
 
     a {
-      color: $white;
+      color: $menu;
       font-size: 2.2rem;
       text-decoration: none;
     }
 
     a:hover {
       color: $menuHover;
+      opacity: 0.5;
     }
 
     i,
