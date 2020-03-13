@@ -61,7 +61,7 @@ export default {
     display: flex;
     align-items: center;
     background: $tableHeader;
-    height: 3.2rem;
+    height: 3.6rem;
     padding: 0 0.7rem;
 
     i {

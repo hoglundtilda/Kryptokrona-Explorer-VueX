@@ -13,9 +13,10 @@
       <div class="numb">
         <p>No</p>
       </div>
-      <input type="text" placeholder="Height" />
+      <!-- input binded to data: "input", will take input in method go()-->
+      <input v-model="input" type="text" placeholder="Height" />
       <button class="btn">Go</button>
-      <button class="btn">
+      <button @click="olderBlocks" class="btn">
         Older
         <i class="fas fa-arrow-right"></i>
       </button>
@@ -46,7 +47,8 @@
         <p>Date</p>
       </div>
       <section class="block-table">
-        <li v-for="(block, index) in recent_blocks" :key="index" class="block-content">
+        <!--getting [recentBlocks] from store in computed -->
+        <li v-for="(block, index) in recentBlocks" :key="index" class="block-content">
           <p class="stats-dark">{{block.height}}</p>
           <p class="stats-dark">{{block.size}}</p>
           <a href class="hash-a">{{block.hash}}</a>
@@ -66,45 +68,28 @@
 export default {
   data: () => {
     return {
-      recent_blocks: [
-        {
-          height: "311.567",
-          size: "430",
-          hash:
-            "8e3f20988efbbfa5be5478fa158c771d4461cac97c5cd6846ac17cac2bedf689",
-          difficulty: "311.344,267",
-          txs: "1",
-          date: "2020-03-11 09:44"
-        },
-        {
-          height: "311.567",
-          size: "430",
-          hash:
-            "8e3f20988efbbfa5be5478fa158c771d4461cac97c5cd6846ac17cac2bedf689",
-          difficulty: "311.344,267",
-          txs: "1",
-          date: "2020-03-11 09:44"
-        },
-        {
-          height: "311.567",
-          size: "430",
-          hash:
-            "8e3f20988efbbfa5be5478fa158c771d4461cac97c5cd6846ac17cac2bedf689",
-          difficulty: "311.344,267",
-          txs: "1",
-          date: "2020-03-11 09:44"
-        },
-        {
-          height: "311.567",
-          size: "430",
-          hash:
-            "8e3f20988efbbfa5be5478fa158c771d4461cac97c5cd6846ac17cac2bedf689",
-          difficulty: "311.344,267",
-          txs: "1",
-          date: "2020-03-11 09:44"
-        }
-      ]
+      input: ""
     };
+  },
+  computed: {
+    recentBlocks() {
+      return this.$store.state.recentBlocks;
+    }
+  },
+  methods: {
+    /* go() {
+      // search with height
+      const height = this.input;
+      console.log(height);
+    }, */
+    /* newer_blocks() {
+
+    }, */
+    olderBlocks() {
+      console.log(this.olderDisabled);
+      // sends openHeight to store/index.js - action: xhrGetBlocks
+      //this.$store.commit("xhrGetBlocks", openHeight);
+    }
   }
 };
 </script>
@@ -112,6 +97,10 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/scss/variables.scss";
 @import "../../assets/scss/textStyles.scss";
+
+.disabled {
+  background: $disabledbg;
+}
 
 .table {
   display: flex;
@@ -126,7 +115,7 @@ export default {
   .table-header {
     display: flex;
     background: $tableHeader;
-    height: 3.2rem;
+    height: 3.6rem;
     padding: 0 0.7rem;
     align-items: center;
 
@@ -215,7 +204,8 @@ export default {
     margin: 1.8rem 0;
 
     .btn {
-      padding: 1rem;
+      padding: 1rem 1.2rem;
+      cursor: pointer;
     }
   }
 }
