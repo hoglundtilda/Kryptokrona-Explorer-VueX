@@ -6,7 +6,7 @@
       <p class="range">Viewing Range: 311.003 - 310.344</p>
     </section>
     <div class="search">
-      <button class="btn">
+      <button @click="newerBlocks" class="btn">
         <i class="fas fa-arrow-left"></i>
         Newer
       </button>
@@ -14,8 +14,8 @@
         <p>No</p>
       </div>
       <!-- input binded to data: "input", will take input in method go()-->
-      <input v-model="input" type="text" placeholder="Height" />
-      <button class="btn">Go</button>
+      <input @keyup.enter="go" v-model="input" type="text" placeholder="Height" />
+      <button @click="go" class="btn">Go</button>
       <button @click="olderBlocks" class="btn">
         Older
         <i class="fas fa-arrow-right"></i>
@@ -48,18 +48,18 @@
       </div>
       <section class="block-table">
         <!--getting [recentBlocks] from store in computed -->
-        <li v-for="(block, index) in recentBlocks" :key="index" class="block-content">
-          <p class="stats-dark">{{block.height}}</p>
-          <p class="stats-dark">{{block.size}}</p>
-          <a href class="hash-a">{{block.hash}}</a>
-          <p class="stats-dark">{{block.difficulty}}</p>
-          <p class="stats-dark">{{block.txs}}</p>
-          <p class="stats-dark">{{block.date}}</p>
+        <li v-for="(block, index) in blocks" :key="index" class="block-content">
+          <p class="stats-dark">{{ block.height }}</p>
+          <p class="stats-dark">{{ block.size }}</p>
+          <a href class="hash-a">{{ block.hash }}</a>
+          <p class="stats-dark">{{ block.difficulty }}</p>
+          <p class="stats-dark">{{ block.txs }}</p>
+          <p class="stats-dark">{{ block.date }}</p>
         </li>
       </section>
     </section>
     <div class="load-more">
-      <button class="btn">Load More</button>
+      <button @click="loadMoreBlocks" class="btn">Load More</button>
     </div>
   </div>
 </template>
@@ -68,39 +68,65 @@
 export default {
   data: () => {
     return {
-      input: ""
+      input: "",
+      blocks: [],
     };
   },
   computed: {
     recentBlocks() {
       return this.$store.state.recentBlocks;
-    }
+    },
+  },
+  watch: {
+    recentBlocks() {
+      const recentBlocksArr = [];
+      for (let i = 0; i < this.recentBlocks.length; i++) {
+        let dateTime = new Date(this.recentBlocks[i].timestamp * 1000);
+        dateTime.toLocaleDateString;
+        const block = {
+          height: this.localizeNumber(this.recentBlocks[i].height),
+          size: this.localizeNumber(this.recentBlocks[i].cumul_size),
+          hash: this.recentBlocks[i].hash,
+          difficulty: this.localizeNumber(this.recentBlocks[i].difficulty),
+          txs: this.recentBlocks[i].tx_count,
+          date: dateTime,
+        };
+        recentBlocksArr.push(block);
+      }
+      this.blocks = recentBlocksArr;
+    },
   },
   methods: {
-    /* go() {
+    go() {
       // search with height
-      const height = this.input;
-      console.log(height);
-    }, */
-    /* newer_blocks() {
-
-    }, */
+     const height = parseInt(this.input);
+        this.$store.dispatch("renderRecentBlocks", height)
+    },
+    newerBlocks() {
+      const height = this.recentBlocks[0].height + 31;
+      this.$store.dispatch("renderRecentBlocks", height)
+    }, 
     olderBlocks() {
-      console.log(this.olderDisabled);
-      // sends openHeight to store/index.js - action: xhrGetBlocks
-      //this.$store.commit("xhrGetBlocks", openHeight);
-    }
-  }
+      const height = this.recentBlocks[0].height - 31
+      this.$store.dispatch("renderRecentBlocks", height)
+// ej klar
+    },
+    loadMoreBlocks() {
+const height = this.recentBlocks[0].height - 31
+this.$store.dispatch("renderRecentBlocks", height)
+    },
+    localizeNumber(number) {
+      const numberFormatter = new Intl.NumberFormat("en-US"); // US formatting, force commas.
+
+      return numberFormatter.format(number);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "../../assets/scss/variables.scss";
 @import "../../assets/scss/textStyles.scss";
-
-.disabled {
-  background: $disabledbg;
-}
 
 .table {
   display: flex;
@@ -192,7 +218,7 @@ export default {
 
       .block-content {
         display: grid;
-        grid-template-columns: 12rem 12rem 65rem 18rem 10rem 20rem;
+        grid-template-columns: 12rem 12rem 65rem 18rem 10rem 25rem;
         margin: 0.8rem 0;
       }
     }

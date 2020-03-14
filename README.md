@@ -15,10 +15,11 @@ npm run serve
 ### Compiles and minifies for production
 
 ```
-Ej nödvändig
 npm run build
 ```
 
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+

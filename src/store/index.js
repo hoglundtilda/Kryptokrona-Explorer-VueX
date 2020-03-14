@@ -6,33 +6,36 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     api: "http://explorer.kryptokrona.se:11898",
-    //
-    lastBlock: {},
-    // example block array, recieved in recentBlocks.vue in computed.
-    recentBlocks: [
-      {
-        height: "311.567",
-        size: "430",
-        hash:
-          "8e3f20988efbbfa5be5478fa158c771d4461cac97c5cd6846ac17cac2bedf689",
-        difficulty: "311.344,267",
-        txs: "1",
-        date: "2020-03-11 09:44"
-      }
-    ]
+    alreadyGeneratedCoins: "",
+    baseReward: "",
+    height: "",
+    transactions: "",
+    difficulty: "",
+    poolTransactions: "",
+    recentBlocks: "",
   },
   mutations: {
     updBlocks(state, data) {
-      state.recentBlocks = data;
+      console.log(data)
+      state.recentBlocks = data.result.blocks;
+      console.log(data.result.blocks)
     },
     updStats(state, data) {
-      state.lastBlock = data.result.block;
-    }
+      state.alreadyGeneratedCoins = data.result.block.alreadyGeneratedCoins;
+      state.baseReward = data.result.block.baseReward;
+    },
+    liveStats(state, data) {
+      state.height = data.height;
+      state.transactions = data.tx_count;
+      state.difficulty = data.difficulty;
+    },
+    poolTransactions(state, data) {
+      state.poolTransactions = data.result.transactions;
+    },
   },
   actions: {
-    async xhrGetBlocks(ctx) {
-      const currHeight = this.recentBlocks[0].height;
-      const openHeight = currHeight - 31 < 0 ? 0 : currHeight - 31;
+    async renderRecentBlocks(ctx, height) {
+      const currHeight = height;
       const url = this.state.api + "/json_rpc";
       fetch(url, {
         method: "POST",
@@ -41,17 +44,16 @@ export default new Vuex.Store({
           id: "test",
           method: "f_blocks_list_json",
           params: {
-            height: openHeight
-          }
+            height: currHeight,
+          },
         }),
         dataType: "json",
-        cache: "false"
       })
         .then(response => response.json())
         .then(data => {
-          console.log(data);
-          if (data.success) {
+          if (data) {
             // can not change any state data in actions. Sending data to mutations: updBlocks
+            console.log(data)
             ctx.commit("updBlocks", data);
           }
         })
@@ -68,14 +70,13 @@ export default new Vuex.Store({
           jsonrpc: "2.0",
           id: "test",
           method: "getlastblockheader",
-          params: {}
+          params: {},
         }),
-        dataType: "json"
+        dataType: "json",
       })
         .then(response => response.json())
         .then(data => {
           if (data) {
-            console.log(data);
             const lastBlockHash = data.result.block_header.hash;
             const url = this.state.api + "/json_rpc";
             fetch(url, {
@@ -85,10 +86,10 @@ export default new Vuex.Store({
                 id: "test",
                 method: "f_block_json",
                 params: {
-                  hash: lastBlockHash
-                }
+                  hash: lastBlockHash,
+                },
               }),
-              dataType: "json"
+              dataType: "json",
             })
               .then(response => response.json())
               .then(data => {
@@ -101,7 +102,47 @@ export default new Vuex.Store({
         .catch(error => {
           console.error("Error:", error);
         });
-    }
+    },
+    fetchLiveStats(ctx) {
+      const url = this.state.api + "/getinfo";
+      fetch(url, {
+        method: "GET",
+        dataType: "json",
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data) {
+            ctx.commit("liveStats", data);
+            const height = data.height - 1;
+            this.dispatch("renderRecentBlocks", height);
+          }
+        })
+        .catch(error => {
+          console.error("Error:", error);
+        });
+    },
+    getPoolTransactions(ctx) {
+      const url = this.state.api + "/json_rpc";
+      fetch(url, {
+        method: "POST",
+        body: JSON.stringify({
+          jsonrpc: "2.0",
+          id: "test",
+          method: "f_on_transactions_pool_json",
+          params: {},
+        }),
+        dataType: "text",
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data) {
+            ctx.commit("poolTransactions", data);
+          }
+        })
+        .catch(error => {
+          console.error("Error:", error);
+        });
+    },
   },
-  modules: {}
+  modules: {},
 });

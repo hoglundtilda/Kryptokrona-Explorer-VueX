@@ -9,29 +9,29 @@
         <div class="stats">
           <i class="fas fa-bars"></i>
           <p>Height:</p>
-          <p>{{stats.networkHeight}}</p>
+          <p>{{ networkHeight }}</p>
         </div>
         <div class="stats">
           <i class="fas fa-exchange-alt"></i>
           <p>Transactions:</p>
-          <p>{{stats.networkTransactions}}</p>
+          <p>{{ networkTransactions }}</p>
         </div>
         <div class="stats">
           <i class="fas fa-money-bill-alt"></i>
           <p>Reward:</p>
-          <p>{{stats.currentReward}}</p>
+          <p>{{ reward }}</p>
           <p>XKR</p>
         </div>
         <div class="stats">
           <i class="fas fa-certificate"></i>
           <p>Supply:</p>
-          <p>{{stats.totalCoins}}</p>
+          <p>{{ supply }}</p>
           <p>XKR</p>
         </div>
         <div class="stats">
           <i class="fas fa-percentage"></i>
           <p>Emission:</p>
-          <p>{{stats.networkEmission}}</p>
+          <p>{{ emissionPercent }}</p>
           <p>%</p>
         </div>
       </section>
@@ -39,24 +39,23 @@
         <div class="stats">
           <i class="fas fa-unlock"></i>
           <p>Difficulty:</p>
-          <p>1</p>
+          <p>{{ networkDifficulty }}</p>
           <p>M</p>
         </div>
         <div class="stats">
           <i class="fas fa-lock"></i>
           <p>Avarage Difficulty:</p>
-          <p>....</p>
+          <p>{{ avarageDifficulty }}</p>
         </div>
         <div class="stats">
           <i class="fas fa-tachometer-alt"></i>
           <p>Hash Rate:</p>
-          <p>{{stats.networkHashrate}}</p>
-          <p>kH</p>
+          <p>{{ networkHashrate }}</p>
         </div>
         <div class="stats">
           <i class="fas fa-clock"></i>
           <p>Avarage Hash Rate:</p>
-          <p>...</p>
+          <p>{{ avarageHashrate }}</p>
         </div>
       </section>
     </section>
@@ -67,42 +66,119 @@
 export default {
   data: () => {
     return {
-      // created in watch: lastBlock, binded to template elements
-      stats: {}
+      networkHeight: "",
+      networkTransactions: "",
+      reward: "",
+      supply: "",
+      networkDifficulty: "",
+      emissionPercent: "",
+      avarageDifficulty: "",
+      networkHashrate: "",
+      avarageHashrate: "",
     };
   },
   computed: {
-    lastBlock() {
-      return this.$store.state.lastBlock;
-    }
+    // get supply
+    alreadyGeneratedCoins() {
+      return this.$store.state.alreadyGeneratedCoins;
+    },
+    // get reward
+    baseReward() {
+      return this.$store.state.baseReward;
+    },
+    height() {
+      return this.$store.state.height;
+    },
+    transactions() {
+      return this.$store.state.transactions;
+    },
+    difficulty() {
+      return this.$store.state.difficulty;
+    },
   },
   watch: {
-    lastBlock() {
-      const blockTargetInterval = 30; // enter the block interval in seconds
-      const totalSupply = 100000000000000; // enter the total supply in atomic units
-      const coinUnits = 100; // enter in the amount of atomic units in 1 coin, eg. 100 shells = 1 trtl
-      const refreshDelay = 30000;
-      const networkHashrate = this.lastBlock.difficulty / blockTargetInterval;
-      let emissionPercent =
-        (this.lastBlock.alreadyGeneratedCoins / totalSupply) * 100;
-      emissionPercent = emissionPercent.toFixed(4);
+    alreadyGeneratedCoins() {
+      const totalSupply = 100000000000000;
+      let emissionPercent = (this.alreadyGeneratedCoins / totalSupply) * 100;
 
-      const stats = {
-        networkHashrate: networkHashrate,
-        networkEmission: emissionPercent,
-        networkHeight: this.lastBlock.height,
-        networkTransactions: this.lastBlock.transactions[0].amount_out,
-        networkDifficulty: this.lastBlock.difficulty,
-        totalCoins: this.lastBlock.alreadyGeneratedCoins,
-        currentReward: this.lastBlock.baseReward
-      };
-      console.log(this.lastBlock);
-      this.stats = stats;
-    }
+      this.emissionPercent = emissionPercent.toFixed(4);
+      this.supply = this.getReadableCoins(this.alreadyGeneratedCoins, 2);
+    },
+    baseReward() {
+      this.reward = this.getReadableCoins(this.baseReward, 4);
+    },
+    height() {
+      this.networkHeight = this.localizeNumber(this.height);
+    },
+    transactions() {
+      this.networkTransactions = this.localizeNumber(this.transactions);
+    },
+    difficulty() {
+      const blockTargetInterval = 30; // enter the block interval in seconds
+      const hashrate = this.difficulty / blockTargetInterval;
+      this.networkHashrate = this.readableHashrate(hashrate);
+      this.networkDifficulty = this.localizeNumber(this.difficulty);
+    },
+  },
+  methods: {
+    getReadableCoins(coins, digits) {
+      const coinUnits = 100;
+      const amount = (parseInt(coins || 0) / coinUnits).toFixed(
+        digits || coinUnits.toString().length - 1
+      );
+      return this.localizeNumber(amount);
+    },
+    localizeNumber(number) {
+      const numberFormatter = new Intl.NumberFormat("en-US");
+      return numberFormatter.format(number);
+    },
+    readableHashrate(hashrate) {
+      let i = 0;
+      const byteUnits = [
+        " H",
+        " kH",
+        " MH",
+        " GH",
+        " TH",
+        " PH",
+        " EH",
+        " ZH",
+        " YH",
+      ];
+      while (hashrate > 1000) {
+        hashrate = hashrate / 1000;
+        i++;
+      }
+      return this.localizeNumber(hashrate.toFixed(2)) + byteUnits[i];
+    },
+
+    readableDifficulty(difficulty, precision) {
+      if (isNaN(parseFloat(difficulty)) || !isFinite(difficulty)) {
+        return 0;
+      }
+      const units = ["", "k", "M", "G", "T", "P"];
+      const number = Math.floor(Math.log(difficulty) / Math.log(1000));
+
+      if (units[number] === undefined || units[number] === null) {
+        return 0;
+      }
+      return (
+        this.localizeNumber(
+          (difficulty / Math.pow(1000, Math.floor(number))).toFixed(precision)
+        ) +
+        " " +
+        units[number]
+      );
+    },
   },
   mounted() {
     this.$store.dispatch("renderLastBlock");
-  }
+    this.$store.dispatch("fetchLiveStats");
+    window.setInterval(() => {
+      this.$store.dispatch("renderLastBlock");
+      this.$store.dispatch("fetchLiveStats");
+    }, 30000);
+  },
 };
 </script>
 
@@ -150,7 +226,10 @@ export default {
       }
 
       i {
-        padding-right: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-self: center;
+        width: 4rem
       }
     }
   }
