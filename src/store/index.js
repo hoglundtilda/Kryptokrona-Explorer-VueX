@@ -32,6 +32,10 @@ export default new Vuex.Store({
     poolTransactions(state, data) {
       state.poolTransactions = data.result.transactions;
     },
+    //  CHECK TXNs ------------------
+    checkTXNs(state, data) {
+      state
+    }
   },
   // **************************************************
 
@@ -141,6 +145,33 @@ export default new Vuex.Store({
         .then(data => {
           if (data) {
             ctx.commit("poolTransactions", data);
+          }
+        })
+        .catch(error => {
+          console.error("Error:", error);
+        });
+    },
+
+    // *********************************
+    checkTXN(ctx, transactionHash) {
+      const url = this.state.api + "/json_rpc";
+      fetch(url, {
+        method: "POST",
+        body: JSON.stringify({
+          jsonrpc: "2.0",
+          id: "blockexplorer",
+          method: "f_transaction_json",
+          params: {
+            hash: transactionHash
+        } 
+        }),
+        dataType: "json",
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data) {
+            console.log(data)
+            ctx.commit("checkTXNs", data);
           }
         })
         .catch(error => {
