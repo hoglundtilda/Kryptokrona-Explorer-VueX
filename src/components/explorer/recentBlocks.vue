@@ -82,6 +82,8 @@ export default {
       return this.$store.state.recentBlocks;
     },
   },
+  // **************************************************
+
   watch: {
     recentBlocks() {
       const recentBlocksArr = [];
@@ -101,23 +103,25 @@ export default {
       this.blocks = recentBlocksArr;
     },
   },
+  // **************************************************
+
   methods: {
     go() {
       // search with height
       const height = parseInt(this.input);
-      this.$store.dispatch("renderRecentBlocks", height);
+      this.$store.dispatch("getRecentBlocks", height);
     },
     newerBlocks() {
       const height = this.recentBlocks[0].height + 31;
-      this.$store.dispatch("renderRecentBlocks", height);
+      this.$store.dispatch("getRecentBlocks", height);
     },
     olderBlocks() {
       const height = this.recentBlocks[0].height - 31;
-      this.$store.dispatch("renderRecentBlocks", height);
+      this.$store.dispatch("getRecentBlocks", height);
     },
     loadMoreBlocks() {
       const height = this.recentBlocks[0].height - 31;
-      this.$store.dispatch("renderRecentBlocks", height);
+      this.$store.dispatch("getRecentBlocks", height);
     },
     localizeNumber(number) {
       const numberFormatter = new Intl.NumberFormat("en-US"); // US formatting, force commas.

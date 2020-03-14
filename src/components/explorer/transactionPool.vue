@@ -58,6 +58,8 @@ export default {
       return this.$store.state.poolTransactions;
     },
   },
+  // **************************************************
+
   watch: {
     getPoolTransactions() {
       const poolTransactionsArr = [];
@@ -77,6 +79,8 @@ export default {
       this.poolTransactions = poolTransactionsArr;
     },
   },
+  // **************************************************
+
   methods: {
     getReadableCoins(coins, digits) {
       const coinUnits = 100; // enter in the amount of atomic units in 1 coin, eg. 100 shells = 1 trtl
@@ -86,16 +90,19 @@ export default {
       );
       return this.localizeNumber(amount);
     },
+    // --------------------------------------------------
+
     localizeNumber(number) {
       const numberFormatter = new Intl.NumberFormat("en-US"); // US formatting, force commas.
       return numberFormatter.format(number);
     },
+    // --------------------------------------------------
+
     formatPaymentLink(hash) {
       const transactionExplorer = "?hash={hash}#blockchain_transaction";
       transactionExplorer.replace("{hash}", hash);
     },
   },
-
 };
 </script>
 

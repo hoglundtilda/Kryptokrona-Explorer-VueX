@@ -16,9 +16,9 @@ export default new Vuex.Store({
   },
   mutations: {
     updBlocks(state, data) {
-      console.log(data)
+      console.log(data);
       state.recentBlocks = data.result.blocks;
-      console.log(data.result.blocks)
+      console.log(data.result.blocks);
     },
     updStats(state, data) {
       state.alreadyGeneratedCoins = data.result.block.alreadyGeneratedCoins;
@@ -33,8 +33,10 @@ export default new Vuex.Store({
       state.poolTransactions = data.result.transactions;
     },
   },
+  // **************************************************
+
   actions: {
-    async renderRecentBlocks(ctx, height) {
+    async getRecentBlocks(ctx, height) {
       const currHeight = height;
       const url = this.state.api + "/json_rpc";
       fetch(url, {
@@ -52,8 +54,6 @@ export default new Vuex.Store({
         .then(response => response.json())
         .then(data => {
           if (data) {
-            // can not change any state data in actions. Sending data to mutations: updBlocks
-            console.log(data)
             ctx.commit("updBlocks", data);
           }
         })
@@ -61,8 +61,8 @@ export default new Vuex.Store({
           console.error("Error:", error);
         });
     },
-    // will render block on pageload from mounted in stats.vue
-    async renderLastBlock(ctx) {
+    // --------------------------------------------------
+    async getLastBlock(ctx) {
       const url = this.state.api + "/json_rpc";
       fetch(url, {
         method: "POST",
@@ -103,6 +103,8 @@ export default new Vuex.Store({
           console.error("Error:", error);
         });
     },
+    // --------------------------------------------------
+
     fetchLiveStats(ctx) {
       const url = this.state.api + "/getinfo";
       fetch(url, {
@@ -114,13 +116,15 @@ export default new Vuex.Store({
           if (data) {
             ctx.commit("liveStats", data);
             const height = data.height - 1;
-            this.dispatch("renderRecentBlocks", height);
+            this.dispatch("getRecentBlocks", height);
           }
         })
         .catch(error => {
           console.error("Error:", error);
         });
     },
+    // --------------------------------------------------
+
     getPoolTransactions(ctx) {
       const url = this.state.api + "/json_rpc";
       fetch(url, {

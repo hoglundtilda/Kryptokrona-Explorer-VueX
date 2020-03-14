@@ -94,6 +94,8 @@ export default {
       return this.$store.state.difficulty;
     },
   },
+  // **************************************************
+
   watch: {
     alreadyGeneratedCoins() {
       const totalSupply = 100000000000000;
@@ -102,22 +104,33 @@ export default {
       this.emissionPercent = emissionPercent.toFixed(4);
       this.supply = this.getReadableCoins(this.alreadyGeneratedCoins, 2);
     },
+    // --------------------------------------------------
+
     baseReward() {
       this.reward = this.getReadableCoins(this.baseReward, 4);
     },
+    // --------------------------------------------------
+
     height() {
       this.networkHeight = this.localizeNumber(this.height);
     },
+    // --------------------------------------------------
+
     transactions() {
       this.networkTransactions = this.localizeNumber(this.transactions);
     },
+    // --------------------------------------------------
+
     difficulty() {
       const blockTargetInterval = 30; // enter the block interval in seconds
       const hashrate = this.difficulty / blockTargetInterval;
       this.networkHashrate = this.readableHashrate(hashrate);
-      this.networkDifficulty = this.localizeNumber(this.difficulty);
+      const difficulty = this.difficulty / 1000000
+      this.networkDifficulty = Math.round(difficulty)
     },
   },
+  // **************************************************
+
   methods: {
     getReadableCoins(coins, digits) {
       const coinUnits = 100;
@@ -126,10 +139,14 @@ export default {
       );
       return this.localizeNumber(amount);
     },
+    // --------------------------------------------------
+
     localizeNumber(number) {
       const numberFormatter = new Intl.NumberFormat("en-US");
       return numberFormatter.format(number);
     },
+    // --------------------------------------------------
+
     readableHashrate(hashrate) {
       let i = 0;
       const byteUnits = [
@@ -149,6 +166,7 @@ export default {
       }
       return this.localizeNumber(hashrate.toFixed(2)) + byteUnits[i];
     },
+    // --------------------------------------------------
 
     readableDifficulty(difficulty, precision) {
       if (isNaN(parseFloat(difficulty)) || !isFinite(difficulty)) {
@@ -169,16 +187,17 @@ export default {
       );
     },
   },
+  // **************************************************
+
   mounted() {
-    this.$store.dispatch("renderLastBlock");
+    this.$store.dispatch("getLastBlock");
     this.$store.dispatch("fetchLiveStats");
     this.$store.dispatch("getPoolTransactions");
 
     window.setInterval(() => {
-      this.$store.dispatch("renderLastBlock");
-      this.$store.dispatch("getPoolTransactions");
-
+      this.$store.dispatch("getLastBlock");
       this.$store.dispatch("fetchLiveStats");
+      this.$store.dispatch("getPoolTransactions");
     }, 30000);
   },
 };
