@@ -78,11 +78,9 @@ export default {
     };
   },
   computed: {
-    // get supply
     alreadyGeneratedCoins() {
       return this.$store.state.alreadyGeneratedCoins;
     },
-    // get reward
     baseReward() {
       return this.$store.state.baseReward;
     },
@@ -229,7 +227,7 @@ export default {
         display: flex;
         justify-content: center;
         align-self: center;
-        width: 4rem
+        width: 4rem;
       }
     }
   }

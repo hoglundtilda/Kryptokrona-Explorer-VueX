@@ -5,7 +5,10 @@
       <h2>Chart</h2>
       <div @mouseenter="show = true" @mouseleave="show = false" class="info">
         <div v-if="show" class="info-text">
-          <p>Difficulty based on last blocks from the list below. Block size, transactions count. Load more blocks to enlarge chart range.</p>
+          <p>
+            Difficulty based on last blocks from the list below. Block size,
+            transactions count. Load more blocks to enlarge chart range.
+          </p>
         </div>
         <i class="fas fa-question-circle"></i>
       </div>
@@ -20,9 +23,9 @@
 export default {
   data: () => {
     return {
-      show: false
+      show: false,
     };
-  }
+  },
 };
 </script>
 

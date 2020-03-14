@@ -61,7 +61,7 @@ export default new Vuex.Store({
           console.error("Error:", error);
         });
     },
-    // will render block on pageload from mounted in stats
+    // will render block on pageload from mounted in stats.vue
     async renderLastBlock(ctx) {
       const url = this.state.api + "/json_rpc";
       fetch(url, {

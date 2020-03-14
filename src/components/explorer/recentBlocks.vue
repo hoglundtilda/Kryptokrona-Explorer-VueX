@@ -14,7 +14,12 @@
         <p>No</p>
       </div>
       <!-- input binded to data: "input", will take input in method go()-->
-      <input @keyup.enter="go" v-model="input" type="text" placeholder="Height" />
+      <input
+        @keyup.enter="go"
+        v-model="input"
+        type="text"
+        placeholder="Height"
+      />
       <button @click="go" class="btn">Go</button>
       <button @click="olderBlocks" class="btn">
         Older
@@ -99,21 +104,20 @@ export default {
   methods: {
     go() {
       // search with height
-     const height = parseInt(this.input);
-        this.$store.dispatch("renderRecentBlocks", height)
+      const height = parseInt(this.input);
+      this.$store.dispatch("renderRecentBlocks", height);
     },
     newerBlocks() {
       const height = this.recentBlocks[0].height + 31;
-      this.$store.dispatch("renderRecentBlocks", height)
-    }, 
+      this.$store.dispatch("renderRecentBlocks", height);
+    },
     olderBlocks() {
-      const height = this.recentBlocks[0].height - 31
-      this.$store.dispatch("renderRecentBlocks", height)
-// ej klar
+      const height = this.recentBlocks[0].height - 31;
+      this.$store.dispatch("renderRecentBlocks", height);
     },
     loadMoreBlocks() {
-const height = this.recentBlocks[0].height - 31
-this.$store.dispatch("renderRecentBlocks", height)
+      const height = this.recentBlocks[0].height - 31;
+      this.$store.dispatch("renderRecentBlocks", height);
     },
     localizeNumber(number) {
       const numberFormatter = new Intl.NumberFormat("en-US"); // US formatting, force commas.
