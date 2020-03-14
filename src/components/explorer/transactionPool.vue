@@ -95,9 +95,7 @@ export default {
       transactionExplorer.replace("{hash}", hash);
     },
   },
-  mounted() {
-    this.$store.dispatch("getPoolTransactions");
-  },
+
 };
 </script>
 

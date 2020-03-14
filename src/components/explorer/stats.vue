@@ -172,8 +172,12 @@ export default {
   mounted() {
     this.$store.dispatch("renderLastBlock");
     this.$store.dispatch("fetchLiveStats");
+    this.$store.dispatch("getPoolTransactions");
+
     window.setInterval(() => {
       this.$store.dispatch("renderLastBlock");
+      this.$store.dispatch("getPoolTransactions");
+
       this.$store.dispatch("fetchLiveStats");
     }, 30000);
   },
