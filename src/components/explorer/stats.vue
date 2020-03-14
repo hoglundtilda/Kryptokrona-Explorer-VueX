@@ -122,9 +122,11 @@ export default {
     // --------------------------------------------------
 
     difficulty() {
-      const blockTargetInterval = 30; // enter the block interval in seconds
+      const blockTargetInterval = 90;
+      // Fick blockTargetInterval 30 från början men blev fel, med 90 blir det rätt.
       const hashrate = this.difficulty / blockTargetInterval;
-      this.networkHashrate = this.readableHashrate(hashrate);
+
+      this.networkHashrate = this.readableHashrate(this.difficulty / blockTargetInterval);
       const difficulty = this.difficulty / 1000000
       this.networkDifficulty = Math.round(difficulty)
     },
@@ -218,7 +220,7 @@ export default {
   .table-header {
     display: flex;
     background: $tableHeader;
-    height: 3.6rem;
+    height: 2.8rem;
     padding: 0 0.7rem;
     align-items: center;
 
@@ -238,9 +240,17 @@ export default {
       display: flex;
       flex-direction: column;
     }
+
+    .right {
+      margin-right: 2rem;
+    }
+
+
+
+  
     .stats {
       display: flex;
-      margin: 2rem 0;
+      margin: 1.5rem 0;
 
       p {
         padding-right: 0.5rem;

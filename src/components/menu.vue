@@ -22,6 +22,7 @@ export default {
   methods: {
     explorer() {
       this.$router.push("/");
+
     },
     checkTXN() {
       this.$router.push("/check_txn");
@@ -44,7 +45,7 @@ export default {
 
     a {
       color: $menu;
-      font-size: 2.2rem;
+      font-size: 1.8rem;
       text-decoration: none;
     }
 
@@ -58,7 +59,7 @@ export default {
     .apiIcon {
       padding-right: 1rem;
       font-weight: 600;
-      font-size: 2.2rem;
+      font-size: 1.6rem;
     }
   }
 }

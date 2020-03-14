@@ -149,7 +149,7 @@ export default {
   .table-header {
     display: flex;
     background: $tableHeader;
-    height: 3.6rem;
+    height: 2.8rem;
     padding: 0 0.7rem;
     align-items: center;
 
@@ -177,13 +177,13 @@ export default {
       padding: 0 1rem;
       color: $white;
       font-family: $fontFamily;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
     }
 
     ::placeholder {
       color: $white;
       opacity: 0.5;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       font-family: $fontFamily;
     }
 
@@ -205,11 +205,12 @@ export default {
     margin: 0 2.2rem;
     padding: 2rem 3.2rem;
     display: grid;
-    grid-template-columns: 12rem 12rem 65rem 18rem 10rem 20rem;
+    justify-content: center;
+    grid-template-columns: 10rem 10rem 52rem 14rem 8rem 25rem;
 
     .stats {
       display: flex;
-      margin: 2rem 0;
+      margin: 1rem 0;
 
       p {
         padding-right: 0.5rem;
@@ -226,7 +227,7 @@ export default {
 
       .block-content {
         display: grid;
-        grid-template-columns: 12rem 12rem 65rem 18rem 10rem 25rem;
+        grid-template-columns: 10rem 10rem 52rem 14rem 8rem 25rem;
         margin: 0.8rem 0;
       }
     }

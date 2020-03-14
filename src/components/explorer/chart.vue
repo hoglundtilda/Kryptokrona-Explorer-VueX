@@ -44,7 +44,7 @@ export default {
   .table-header {
     display: flex;
     background: $tableHeader;
-    height: 3.6rem;
+    height: 2.8rem;
     padding: 0 0.7rem;
     align-items: center;
 

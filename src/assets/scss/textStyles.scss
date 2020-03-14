@@ -2,11 +2,11 @@
 .table-header {
   i {
     color: $header-Icon;
-    font-size: 1.8rem;
+    font-size: $tableIcon;
   }
   h2 {
     color: $header-H2;
-    font-size: 2.2rem;
+    font-size: $tableHeadline;
     font-weight: 500;
   }
   .range {
@@ -21,11 +21,11 @@
 .stats {
   p {
     color: $stats-P;
-    font-size: 1.8rem;
+    font-size: $tableP;
   }
   i {
     color: $stats-I;
-    font-size: 1.8rem;
+    font-size: $tableContentIcon;
   }
 }
 /* -------------------- */
@@ -33,7 +33,7 @@
 /* Hash links */
 .hash-a {
   text-decoration: none;
-  font-size: 1.8rem;
+  font-size: $hash-a-links;
   color: $hashLinks;
 }
 .hash-a:hover {
@@ -41,7 +41,7 @@
   opacity: 0.5;
 }
 .stats-dark {
-  font-size: 1.8rem;
+  font-size: $stats-dark-p;
   color: $statsDark;
   opacity: 0.5;
 }
@@ -53,7 +53,7 @@
   border-left: 0.5px solid $dark;
   p {
     color: $no;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 500;
   }
 }
@@ -66,11 +66,11 @@
   background: $blockBtn;
   color: $btnText;
   font-family: $fontFamily;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 500;
   i {
     color: $btnIcon;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 }
 
@@ -88,6 +88,6 @@
   background: $dark;
   color: $white;
   p {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
 }

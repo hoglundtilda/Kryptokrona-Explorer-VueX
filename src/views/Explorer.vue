@@ -17,7 +17,8 @@ import RecentBlocks from "../components/explorer/recentBlocks";
 
 export default {
   name: "Explorer",
-  components: { Header, Stats, Chart, TransactionPool, RecentBlocks }
+  components: { Header, Stats, Chart, TransactionPool, RecentBlocks },
+
 };
 </script>
 
@@ -28,7 +29,7 @@ export default {
   display: grid;
   width: 100%;
   column-gap: 2rem;
-  row-gap: 2rem;
+  row-gap: 1rem;
   grid-template-areas: "head head" "stats chart" "transPool transPool" "recentBlocks recentBlocks";
   grid-template-columns: 50% 50%;
 }

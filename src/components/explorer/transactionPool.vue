@@ -122,7 +122,7 @@ export default {
     display: flex;
     align-items: center;
     background: $tableHeader;
-    height: 3.6rem;
+    height: 2.8rem;
     padding: 0 0.7rem;
 
     i {
@@ -150,6 +150,7 @@ export default {
 
     .stats {
       display: flex;
+      align-items: center;
       i {
         padding-right: 1rem;
       }

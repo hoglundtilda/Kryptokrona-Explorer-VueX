@@ -20,7 +20,7 @@ html {
 
 #app {
   max-width: 100vw;
-  padding: 0 10%;
+  padding: 0 15%;
   height: auto;
   display: flex;
   justify-content: center;
