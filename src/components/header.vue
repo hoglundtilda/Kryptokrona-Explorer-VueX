@@ -6,11 +6,12 @@
     <Menu class="menu" />
     <div class="search">
       <input
+        v-model="searchInput"
         type="text"
         class="search-input"
         placeholder="Search by block height/hash, transaction hash, payment id"
       />
-      <button class="search-btn">
+      <button @click="search" class="search-btn">
         <i class="fas fa-search"></i>
       </button>
     </div>
@@ -21,8 +22,30 @@
 import Menu from "./menu.vue";
 export default {
   components: {
-    Menu,
+    Menu
   },
+  data: () => {
+    return {
+      searchInput: ""
+    };
+  },
+  methods: {
+    search() {
+      const path = `/result`;
+      if (this.searchInput.length < 64) {
+        this.$store.dispatch("getBlockByHeight", this.searchInput);
+
+        if (this.$route.path !== path)
+          this.$router.push(path, this.searchInput);
+      } else if (this.searchInput.length == 64) {
+        this.$store.dispatch("getBlockByHash_or_id", this.searchInput);
+        if (this.$route.path !== path)
+          this.$router.push(path, this.searchInput);
+      } else {
+        console.log("Wrong search input");
+      }
+    }
+  }
 };
 </script>
 

@@ -7,7 +7,8 @@
       </h1>
       <div class="checkTxn-inputs">
         <p class="checkTxn-label">Transaction Hash:</p>
-        <input v-model="transaction_hash"
+        <input
+          v-model="transaction_hash"
           type="text"
           class="search-input"
           placeholder="64 character transaction id"
@@ -21,7 +22,8 @@
           <input class="checkTxn-label" type="radio" />
           <p class="checkTxn-label">View Key</p>
         </div>
-        <input v-model="private_key"
+        <input
+          v-model="private_key"
           type="text"
           class="search-input"
           placeholder="64 character private view or TXN key"
@@ -29,7 +31,8 @@
       </div>
       <div class="checkTxn-inputs">
         <p class="checkTxn-label">Recipient Public Adress:</p>
-        <input v-model="public_adress"
+        <input
+          v-model="public_adress"
           type="text"
           class="search-input long-length"
           placeholder="99 character public KKR adress"
@@ -63,18 +66,18 @@ import Header from "../components/header";
 export default {
   name: "Explorer",
   components: {
-    Header,
+    Header
   },
   data: () => {
     return {
       transaction_hash: "",
       privateKey: "",
       public_adress: ""
-    }
+    };
   },
   methods: {
     checkTransaction() {
-      this.$store.dispatch("checkTXN", this.transaction_hash)
+      this.$store.dispatch("checkTXN", this.transaction_hash);
     }
   }
 };
@@ -102,12 +105,12 @@ export default {
 }
 
 .checkTxn-headline {
-  font-size: $checkTxnHeadline;
+  font-size: $defaultHeadlineSize;
   color: $menu;
   letter-spacing: 2px;
 
   i {
-    font-size: $checkTxn-Icon;
+    font-size: $defaultHeadlineIcon;
     padding-right: 1rem;
   }
 }

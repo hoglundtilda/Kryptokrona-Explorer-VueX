@@ -32,11 +32,7 @@
         <p>Hash</p>
       </div>
     </section>
-    <li
-      v-for="(transaction, index) in poolTransactions"
-      :key="index"
-      class="poolTransactions"
-    >
+    <li v-for="(transaction, index) in poolTransactions" :key="index" class="poolTransactions">
       <p class="stats-dark">{{ transaction.amount_out }}</p>
       <p class="stats-dark">{{ transaction.fee }}</p>
       <p class="stats-dark">{{ transaction.size }}</p>
@@ -50,13 +46,13 @@ export default {
   data: () => {
     return {
       show: false,
-      poolTransactions: "",
+      poolTransactions: ""
     };
   },
   computed: {
     getPoolTransactions() {
-      return this.$store.state.poolTransactions;
-    },
+      return this.$store.state.getPoolTransactions.poolTransactions;
+    }
   },
   // **************************************************
 
@@ -72,12 +68,12 @@ export default {
           ),
           fee: this.getReadableCoins(this.getPoolTransactions[i].fee, 4, true),
           size: this.localizeNumber(this.getPoolTransactions[i].fee),
-          hash: this.getPoolTransactions[i].hash,
+          hash: this.getPoolTransactions[i].hash
         };
         poolTransactionsArr.push(transaction);
       }
       this.poolTransactions = poolTransactionsArr;
-    },
+    }
   },
   // **************************************************
 
@@ -101,8 +97,8 @@ export default {
     formatPaymentLink(hash) {
       const transactionExplorer = "?hash={hash}#blockchain_transaction";
       transactionExplorer.replace("{hash}", hash);
-    },
-  },
+    }
+  }
 };
 </script>
 

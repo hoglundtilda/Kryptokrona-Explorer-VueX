@@ -74,7 +74,7 @@ export default {
   },
   computed: {
     recentBlocks() {
-      return this.$store.state.recentBlocks;
+      return this.$store.state.getBlocksData.recentBlocks;
     }
   },
   // **************************************************

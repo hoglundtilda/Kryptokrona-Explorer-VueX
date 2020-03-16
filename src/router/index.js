@@ -2,12 +2,12 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Explorer from "../views/Explorer.vue";
 import CheckTXN from "../views/CheckTXN.vue";
+import SearchResult from "../views/searchResult.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    //default page
     path: "/",
     name: "Explorer",
     component: Explorer
@@ -16,6 +16,11 @@ const routes = [
     path: "/check_txn",
     name: "CheckTXN",
     component: CheckTXN
+  },
+  {
+    path: "/result",
+    name: "SearchResult",
+    component: SearchResult
   }
 ];
 

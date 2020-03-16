@@ -79,19 +79,19 @@ export default {
   },
   computed: {
     alreadyGeneratedCoins() {
-      return this.$store.state.alreadyGeneratedCoins;
+      return this.$store.state.getBlocksData.alreadyGeneratedCoins;
     },
     baseReward() {
-      return this.$store.state.baseReward;
+      return this.$store.state.getBlocksData.baseReward;
     },
     height() {
-      return this.$store.state.height;
+      return this.$store.state.getBlocksData.height;
     },
     transactions() {
-      return this.$store.state.transactions;
+      return this.$store.state.getBlocksData.transactions;
     },
     difficulty() {
-      return this.$store.state.difficulty;
+      return this.$store.state.getBlocksData.difficulty;
     }
   },
   // **************************************************
@@ -112,7 +112,6 @@ export default {
     // --------------------------------------------------
 
     height() {
-      console.log("I watch för height");
       this.networkHeight = this.localizeNumber(this.height);
     },
     // --------------------------------------------------
