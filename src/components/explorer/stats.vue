@@ -192,22 +192,16 @@ export default {
     }
   },
   // **************************************************
-  created() {
-    this.$store.dispatch("fetchLiveStats");
-    console.log("created");
-  },
   mounted() {
     this.$store.dispatch("fetchLiveStats");
     this.$store.dispatch("getLastBlock");
     this.$store.dispatch("getPoolTransactions");
 
-    console.log("mounted");
-
-    /*window.setInterval(() => {
+    window.setInterval(() => {
       this.$store.dispatch("fetchLiveStats");
       this.$store.dispatch("getLastBlock");
       this.$store.dispatch("getPoolTransactions");
-    }, 30000);*/
+    }, 30000);
   }
 };
 </script>

@@ -16,6 +16,7 @@ export default new Vuex.Store({
   },
   mutations: {
     clearState(state) {
+      // Because computed has its own chache, state needs to be wiped out to show stats when switching views.
       state.alreadyGeneratedCoins = 0;
       state.baseReward = 0;
       state.height = 0;
