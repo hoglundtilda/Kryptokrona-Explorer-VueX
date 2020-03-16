@@ -230,7 +230,7 @@ export default {
   }
 
   .content {
-    padding: 2rem 3.2rem;
+    padding: 2rem 2rem;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -239,10 +239,6 @@ export default {
     .right {
       display: flex;
       flex-direction: column;
-    }
-
-    .right {
-      margin-right: 2rem;
     }
 
     .stats {
@@ -261,5 +257,16 @@ export default {
       }
     }
   }
+}
+
+@media only screen and (max-width: 700px) {
+ .content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+ 
+
+  
+}
 }
 </style>

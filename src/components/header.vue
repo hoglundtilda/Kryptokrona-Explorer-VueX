@@ -35,12 +35,10 @@ export default {
       if (this.searchInput.length < 64) {
         this.$store.dispatch("getBlockByHeight", this.searchInput);
 
-        if (this.$route.path !== path)
-          this.$router.push(path, this.searchInput);
+      
       } else if (this.searchInput.length == 64) {
         this.$store.dispatch("getBlockByHash_or_id", this.searchInput);
-        if (this.$route.path !== path)
-          this.$router.push(path, this.searchInput);
+      
       } else {
         console.log("Wrong search input");
       }

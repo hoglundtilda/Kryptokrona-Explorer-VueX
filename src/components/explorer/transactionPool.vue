@@ -32,11 +32,17 @@
         <p>Hash</p>
       </div>
     </section>
-    <li v-for="(transaction, index) in poolTransactions" :key="index" class="poolTransactions">
+    <li
+      v-for="(transaction, index) in poolTransactions"
+      :key="index"
+      class="poolTransactions"
+    >
       <p class="stats-dark">{{ transaction.amount_out }}</p>
       <p class="stats-dark">{{ transaction.fee }}</p>
       <p class="stats-dark">{{ transaction.size }}</p>
-      <a class="hash-a">{{ transaction.hash }}</a>
+      <a @click="searchByHash(transaction.hash)" class="hash-a">{{
+        transaction.hash
+      }}</a>
     </li>
   </div>
 </template>
@@ -46,13 +52,14 @@ export default {
   data: () => {
     return {
       show: false,
-      poolTransactions: ""
+      poolTransactions: "",
     };
   },
   computed: {
     getPoolTransactions() {
+      console.log(this.$store.state.getPoolTransactions.poolTransactions)
       return this.$store.state.getPoolTransactions.poolTransactions;
-    }
+    },
   },
   // **************************************************
 
@@ -68,12 +75,12 @@ export default {
           ),
           fee: this.getReadableCoins(this.getPoolTransactions[i].fee, 4, true),
           size: this.localizeNumber(this.getPoolTransactions[i].fee),
-          hash: this.getPoolTransactions[i].hash
+          hash: this.getPoolTransactions[i].hash,
         };
         poolTransactionsArr.push(transaction);
       }
       this.poolTransactions = poolTransactionsArr;
-    }
+    },
   },
   // **************************************************
 
@@ -97,8 +104,14 @@ export default {
     formatPaymentLink(hash) {
       const transactionExplorer = "?hash={hash}#blockchain_transaction";
       transactionExplorer.replace("{hash}", hash);
-    }
-  }
+    },
+    // --------------------------------------------------
+
+    searchByHash(hash) {
+      this.$store.dispatch("getBlockByHash_or_id", hash);
+      this.$router.push("/result");
+    },
+  },
 };
 </script>
 

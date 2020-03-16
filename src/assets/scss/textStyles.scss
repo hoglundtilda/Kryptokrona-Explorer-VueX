@@ -10,9 +10,10 @@
     font-weight: 500;
   }
   .range {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: $viewingRange;
     opacity: 0.5;
+    font-weight: 500;
   }
 }
 /* -------------------- */
@@ -35,6 +36,7 @@
   text-decoration: none;
   font-size: $hash-a-links;
   color: $hashLinks;
+  cursor: pointer;
 }
 .hash-a:hover {
   color: $hashHover;

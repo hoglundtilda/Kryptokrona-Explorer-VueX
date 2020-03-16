@@ -6,11 +6,9 @@ const searchData = {
   mutations: {
     blockByHeight(state, data) {
       state.searchData = data.result.block_header;
-      console.log(state.searchData);
     },
     blockByHash_or_id(state, data) {
       state.searchData = data.result.block;
-      console.log(state.searchData);
     }
   },
   actions: {

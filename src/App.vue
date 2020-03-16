@@ -20,15 +20,24 @@ export default {};
 
 html {
   background: $black;
+
 }
 
 #app {
-  max-width: 100vw;
+ max-width: 100vw;
   padding: 0 15%;
   height: auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   background: $black;
   font-family: $fontFamily;
+}
+
+@media screen and (max-width: 700px) {
+ #app {
+
+   padding: 0;
+ }
 }
 </style>

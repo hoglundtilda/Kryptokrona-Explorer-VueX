@@ -14,7 +14,12 @@
         <p>No</p>
       </div>
       <!-- input binded to data: "input", will take input in method go()-->
-      <input @keyup.enter="go" v-model="input" type="text" placeholder="Height" />
+      <input
+        @keyup.enter="go"
+        v-model="input"
+        type="text"
+        placeholder="Height"
+      />
       <button @click="go" class="btn">Go</button>
       <button @click="olderBlocks" class="btn">
         Older
@@ -51,7 +56,9 @@
         <li v-for="(block, index) in blocks" :key="index" class="block-content">
           <p class="stats-dark">{{ block.height }}</p>
           <p class="stats-dark">{{ block.size }}</p>
-          <a href class="hash-a">{{ block.hash }}</a>
+          <a @click="searchByHash(block.hash)" class="hash-a">{{
+            block.hash
+          }}</a>
           <p class="stats-dark">{{ block.difficulty }}</p>
           <p class="stats-dark">{{ block.txs }}</p>
           <p class="stats-dark">{{ block.date }}</p>
@@ -69,13 +76,13 @@ export default {
   data: () => {
     return {
       input: "",
-      blocks: []
+      blocks: [],
     };
   },
   computed: {
     recentBlocks() {
       return this.$store.state.getBlocksData.recentBlocks;
-    }
+    },
   },
   // **************************************************
 
@@ -83,20 +90,19 @@ export default {
     recentBlocks() {
       const recentBlocksArr = [];
       for (let i = 0; i < this.recentBlocks.length; i++) {
-        let dateTime = new Date(this.recentBlocks[i].timestamp * 1000);
-        dateTime.toLocaleDateString;
+        const dateTime = new Date(this.recentBlocks[i].timestamp * 1000);
         const block = {
           height: this.localizeNumber(this.recentBlocks[i].height),
           size: this.localizeNumber(this.recentBlocks[i].cumul_size),
           hash: this.recentBlocks[i].hash,
           difficulty: this.localizeNumber(this.recentBlocks[i].difficulty),
           txs: this.recentBlocks[i].tx_count,
-          date: dateTime
+          date: dateTime.toGMTString(),
         };
         recentBlocksArr.push(block);
       }
       this.blocks = recentBlocksArr;
-    }
+    },
   },
   // **************************************************
 
@@ -118,12 +124,16 @@ export default {
       const height = this.recentBlocks[0].height - 31;
       this.$store.dispatch("getRecentBlocks", height);
     },
+    searchByHash(hash) {
+      this.$store.dispatch("getBlockByHash_or_id", hash);
+    
+    },
     localizeNumber(number) {
       // US formatting, force commas.
       const numberFormatter = new Intl.NumberFormat("en-US");
       return numberFormatter.format(number);
-    }
-  }
+    },
+  },
 };
 </script>
 
