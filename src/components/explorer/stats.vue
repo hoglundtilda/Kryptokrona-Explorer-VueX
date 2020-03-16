@@ -74,7 +74,7 @@ export default {
       emissionPercent: "",
       avarageDifficulty: "",
       networkHashrate: "",
-      avarageHashrate: "",
+      avarageHashrate: ""
     };
   },
   computed: {
@@ -92,7 +92,7 @@ export default {
     },
     difficulty() {
       return this.$store.state.difficulty;
-    },
+    }
   },
   // **************************************************
 
@@ -112,6 +112,7 @@ export default {
     // --------------------------------------------------
 
     height() {
+      console.log("I watch för height");
       this.networkHeight = this.localizeNumber(this.height);
     },
     // --------------------------------------------------
@@ -123,13 +124,14 @@ export default {
 
     difficulty() {
       const blockTargetInterval = 90;
-      // Fick blockTargetInterval 30 från början men blev fel, med 90 blir det rätt.
       const hashrate = this.difficulty / blockTargetInterval;
 
-      this.networkHashrate = this.readableHashrate(this.difficulty / blockTargetInterval);
-      const difficulty = this.difficulty / 1000000
-      this.networkDifficulty = Math.round(difficulty)
-    },
+      this.networkHashrate = this.readableHashrate(
+        this.difficulty / blockTargetInterval
+      );
+      const difficulty = this.difficulty / 1000000;
+      this.networkDifficulty = Math.round(difficulty);
+    }
   },
   // **************************************************
 
@@ -160,7 +162,7 @@ export default {
         " PH",
         " EH",
         " ZH",
-        " YH",
+        " YH"
       ];
       while (hashrate > 1000) {
         hashrate = hashrate / 1000;
@@ -187,21 +189,26 @@ export default {
         " " +
         units[number]
       );
-    },
+    }
   },
   // **************************************************
-
-  mounted() {
-    this.$store.dispatch("getLastBlock");
+  created() {
     this.$store.dispatch("fetchLiveStats");
+    console.log("created");
+  },
+  mounted() {
+    this.$store.dispatch("fetchLiveStats");
+    this.$store.dispatch("getLastBlock");
     this.$store.dispatch("getPoolTransactions");
 
-    window.setInterval(() => {
-      this.$store.dispatch("getLastBlock");
+    console.log("mounted");
+
+    /*window.setInterval(() => {
       this.$store.dispatch("fetchLiveStats");
+      this.$store.dispatch("getLastBlock");
       this.$store.dispatch("getPoolTransactions");
-    }, 30000);
-  },
+    }, 30000);*/
+  }
 };
 </script>
 
@@ -245,9 +252,6 @@ export default {
       margin-right: 2rem;
     }
 
-
-
-  
     .stats {
       display: flex;
       margin: 1.5rem 0;

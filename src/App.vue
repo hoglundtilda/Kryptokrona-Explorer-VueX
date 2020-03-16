@@ -4,6 +4,10 @@
   </div>
 </template>
 
+<script>
+export default {};
+</script>
+
 <style lang="scss">
 @import "./assets/scss/variables.scss";
 @import url("https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap");

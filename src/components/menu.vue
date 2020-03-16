@@ -2,16 +2,24 @@
   <div class="menu">
     <nav>
       <li @click="explorer">
-        <a> <i class="fas fa-cubes"></i>Block Explorer </a>
+        <a>
+          <i class="fas fa-cubes"></i>Block Explorer
+        </a>
       </li>
       <li @click="checkTXN">
-        <a> <i class="fas fa-exchange-alt"></i>Check TXNs </a>
+        <a>
+          <i class="fas fa-exchange-alt"></i>Check TXNs
+        </a>
       </li>
       <li>
-        <a> <i class="fas fa-gavel"></i>Pools </a>
+        <a>
+          <i class="fas fa-gavel"></i>Pools
+        </a>
       </li>
       <li>
-        <a> <span class="apiIcon">&#60;/&#62;</span>API </a>
+        <a>
+          <span class="apiIcon">&#60;/&#62;</span>API
+        </a>
       </li>
     </nav>
   </div>
@@ -22,12 +30,11 @@ export default {
   methods: {
     explorer() {
       this.$router.push("/");
-
     },
     checkTXN() {
       this.$router.push("/check_txn");
-    },
-  },
+    }
+  }
 };
 </script>
 

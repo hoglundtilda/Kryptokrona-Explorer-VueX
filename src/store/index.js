@@ -12,11 +12,17 @@ export default new Vuex.Store({
     transactions: "",
     difficulty: "",
     poolTransactions: "",
-    recentBlocks: "",
+    recentBlocks: ""
   },
   mutations: {
+    clearState(state) {
+      state.alreadyGeneratedCoins = 0;
+      state.baseReward = 0;
+      state.height = 0;
+      state.transactions = 0;
+      state.difficulty = 0;
+    },
     updBlocks(state, data) {
-      console.log(data);
       state.recentBlocks = data.result.blocks;
       console.log(data.result.blocks);
     },
@@ -34,7 +40,7 @@ export default new Vuex.Store({
     },
     //  CHECK TXNs ------------------
     checkTXNs(state, data) {
-      state
+      state;
     }
   },
   // **************************************************
@@ -50,10 +56,10 @@ export default new Vuex.Store({
           id: "test",
           method: "f_blocks_list_json",
           params: {
-            height: currHeight,
-          },
+            height: currHeight
+          }
         }),
-        dataType: "json",
+        dataType: "json"
       })
         .then(response => response.json())
         .then(data => {
@@ -74,9 +80,9 @@ export default new Vuex.Store({
           jsonrpc: "2.0",
           id: "test",
           method: "getlastblockheader",
-          params: {},
+          params: {}
         }),
-        dataType: "json",
+        dataType: "json"
       })
         .then(response => response.json())
         .then(data => {
@@ -90,10 +96,10 @@ export default new Vuex.Store({
                 id: "test",
                 method: "f_block_json",
                 params: {
-                  hash: lastBlockHash,
-                },
+                  hash: lastBlockHash
+                }
               }),
-              dataType: "json",
+              dataType: "json"
             })
               .then(response => response.json())
               .then(data => {
@@ -110,10 +116,12 @@ export default new Vuex.Store({
     // --------------------------------------------------
 
     fetchLiveStats(ctx) {
+      ctx.commit("clearState");
+
       const url = this.state.api + "/getinfo";
       fetch(url, {
         method: "GET",
-        dataType: "json",
+        dataType: "json"
       })
         .then(response => response.json())
         .then(data => {
@@ -137,9 +145,9 @@ export default new Vuex.Store({
           jsonrpc: "2.0",
           id: "test",
           method: "f_on_transactions_pool_json",
-          params: {},
+          params: {}
         }),
-        dataType: "text",
+        dataType: "text"
       })
         .then(response => response.json())
         .then(data => {
@@ -163,21 +171,20 @@ export default new Vuex.Store({
           method: "f_transaction_json",
           params: {
             hash: transactionHash
-        } 
+          }
         }),
-        dataType: "json",
+        dataType: "json"
       })
         .then(response => response.json())
         .then(data => {
           if (data) {
-            console.log(data)
             ctx.commit("checkTXNs", data);
           }
         })
         .catch(error => {
           console.error("Error:", error);
         });
-    },
+    }
   },
-  modules: {},
+  modules: {}
 });

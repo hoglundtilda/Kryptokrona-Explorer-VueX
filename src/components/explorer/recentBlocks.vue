@@ -14,12 +14,7 @@
         <p>No</p>
       </div>
       <!-- input binded to data: "input", will take input in method go()-->
-      <input
-        @keyup.enter="go"
-        v-model="input"
-        type="text"
-        placeholder="Height"
-      />
+      <input @keyup.enter="go" v-model="input" type="text" placeholder="Height" />
       <button @click="go" class="btn">Go</button>
       <button @click="olderBlocks" class="btn">
         Older
@@ -74,13 +69,13 @@ export default {
   data: () => {
     return {
       input: "",
-      blocks: [],
+      blocks: []
     };
   },
   computed: {
     recentBlocks() {
       return this.$store.state.recentBlocks;
-    },
+    }
   },
   // **************************************************
 
@@ -96,12 +91,12 @@ export default {
           hash: this.recentBlocks[i].hash,
           difficulty: this.localizeNumber(this.recentBlocks[i].difficulty),
           txs: this.recentBlocks[i].tx_count,
-          date: dateTime,
+          date: dateTime
         };
         recentBlocksArr.push(block);
       }
       this.blocks = recentBlocksArr;
-    },
+    }
   },
   // **************************************************
 
@@ -124,11 +119,11 @@ export default {
       this.$store.dispatch("getRecentBlocks", height);
     },
     localizeNumber(number) {
-      const numberFormatter = new Intl.NumberFormat("en-US"); // US formatting, force commas.
-
+      // US formatting, force commas.
+      const numberFormatter = new Intl.NumberFormat("en-US");
       return numberFormatter.format(number);
-    },
-  },
+    }
+  }
 };
 </script>
 
