@@ -105,8 +105,7 @@
 
 <script>
 export default {
-  components: {
-  },
+  components: {},
   data: () => {
     return {
       supply: "",
@@ -130,12 +129,15 @@ export default {
   computed: {
     searchData() {
       return this.$store.state.getSearchData.searchData;
-    },
+    }
   },
   watch: {
     searchData() {
-        if(this.searchData.hash) {this.showResult = true }
-        else { this.showResult = false}
+      if (this.searchData.hash) {
+        this.showResult = true;
+      } else {
+        this.showResult = false;
+      }
       const data = this.searchData;
       this.supply = this.getReadableCoins(data.alreadyGeneratedCoins, 2);
       this.height = this.localizeNumber(data.height);
@@ -157,7 +159,7 @@ export default {
       this.baseReward = this.localizeNumber(data.baseReward);
       this.totalFee = data.totalFeeAmount;
       this.reward = this.localizeNumber(data.reward);
-    },
+    }
   },
   methods: {
     localizeNumber(number) {
@@ -177,8 +179,8 @@ export default {
       } else {
         return "NO";
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -206,15 +208,12 @@ export default {
     }
 
     .block-hash {
-        color: $white;
-        opacity: 0.5;
-        font-size: 1.6rem;
-        padding: 0.3rem 0 0 1rem;
-        font-weight: 500;
-
+      color: $white;
+      opacity: 0.5;
+      font-size: 1.6rem;
+      padding: 0.3rem 0 0 1rem;
+      font-weight: 500;
     }
-
-  
   }
 
   .content {
@@ -224,37 +223,34 @@ export default {
     justify-content: space-between;
 
     .left,
-  .right {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .stats {
-    display: flex;
-    margin: 1rem 0;
-
-    p {
-      padding-right: 0.5rem;
-    }
-
-    i {
+    .right {
       display: flex;
-      justify-content: center;
-      align-self: center;
-      width: 4rem;
+      flex-direction: column;
     }
-  }
+
+    .stats {
+      display: flex;
+      margin: 1rem 0;
+
+      p {
+        padding-right: 0.5rem;
+      }
+
+      i {
+        display: flex;
+        justify-content: center;
+        align-self: center;
+        width: 4rem;
+      }
+    }
   }
 }
 
 @media only screen and (max-width: 700px) {
- .content {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
- 
-
-  
-}
+  .content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 }
 </style>

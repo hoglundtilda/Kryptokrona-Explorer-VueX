@@ -3,7 +3,9 @@
     <Header class="header" />
     <section class="result">
       <div class="headline">
-        <h1 class="search-headline"><i class="fas fa-cube"></i>Block</h1>
+        <h1 class="search-headline">
+          <i class="fas fa-cube"></i>Block
+        </h1>
         <h2>{{ searchData.hash }}</h2>
       </div>
       <section class="content">
@@ -102,6 +104,7 @@
         </section>
       </section>
     </section>
+    <BlockTransactions class="block-transactions" />
   </div>
 </template>
 
@@ -110,7 +113,7 @@ import Header from "../components/header";
 
 export default {
   components: {
-    Header,
+    Header
   },
   data: () => {
     return {
@@ -128,13 +131,13 @@ export default {
       effectiveSizeMedian: "",
       rewardPenalty: "",
       baseReward: "",
-      totalFee: "",
+      totalFee: ""
     };
   },
   computed: {
     searchData() {
       return this.$store.state.getSearchData.searchData;
-    },
+    }
   },
   watch: {
     searchData() {
@@ -159,7 +162,7 @@ export default {
       this.baseReward = this.localizeNumber(data.baseReward);
       this.totalFee = data.totalFeeAmount;
       this.reward = this.localizeNumber(data.reward);
-    },
+    }
   },
   methods: {
     localizeNumber(number) {
@@ -179,8 +182,8 @@ export default {
       } else {
         return "NO";
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
