@@ -1,18 +1,9 @@
 <template>
-  <div class="table">
+<div class="table">
     <section class="table-header">
       <i class="fas fa-exchange-alt"></i>
-      <h2>Transaction Pool</h2>
-      <div @mouseenter="show = true" @mouseleave="show = false" class="info">
-        <div v-if="show" class="info-text">
-          <p>
-            Recent transactions waiting to be included into a block. Once it
-            happens a transaction gets into the blockchain and becomes
-            confirmed.
-          </p>
-        </div>
-        <i class="fas fa-question-circle"></i>
-      </div>
+      <h2>Transactions</h2>
+      
     </section>
     <section class="content">
       <div class="stats">
@@ -33,7 +24,7 @@
       </div>
     </section>
     <li
-      v-for="(transaction, index) in poolTransactions"
+      v-for="(transaction, index) in transactions"
       :key="index"
       class="poolTransactions"
     >
@@ -52,34 +43,35 @@ export default {
   data: () => {
     return {
       show: false,
-      poolTransactions: "",
+      transactions: []
     };
   },
   computed: {
-    getPoolTransactions() {
-      console.log(this.$store.state.getPoolTransactions.poolTransactions)
-      return this.$store.state.getPoolTransactions.poolTransactions;
+    getTransactions() {
+
+      return this.$store.state.getSearchData.searchData.transactions;
     },
   },
   // **************************************************
 
   watch: {
-    getPoolTransactions() {
-      const poolTransactionsArr = [];
-      for (let i = 0; i < this.getPoolTransactions.length; i++) {
+    getTransactions() {
+      const transactionsArr = [];
+      for (let i = 0; i < this.getTransactions.length; i++) {
         const transaction = {
           amount_out: this.getReadableCoins(
-            this.getPoolTransactions[i].amount_out,
+            this.getTransactions[i].amount_out,
             4,
             true
           ),
-          fee: this.getReadableCoins(this.getPoolTransactions[i].fee, 4, true),
-          size: this.localizeNumber(this.getPoolTransactions[i].fee),
-          hash: this.getPoolTransactions[i].hash,
+          fee: this.getReadableCoins(this.getTransactions[i].fee, 4, true),
+          size: this.localizeNumber(this.getTransactions[i].fee),
+          hash: this.getTransactions[i].hash,
         };
-        poolTransactionsArr.push(transaction);
+        transactionsArr.push(transaction);
       }
-      this.poolTransactions = poolTransactionsArr;
+      console.log(transactionsArr)
+      this.transactions = transactionsArr;
     },
   },
   // **************************************************
@@ -106,8 +98,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/variables.scss";
-@import "../../assets/scss/textStyles.scss";
+@import "../../../assets/scss/variables.scss";
+@import "../../../assets/scss/textStyles.scss";
 
 .table {
   display: flex;

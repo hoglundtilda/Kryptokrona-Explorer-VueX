@@ -5,10 +5,6 @@ const searchData = {
     blockTransactions: ""
   },
   mutations: {
-    blockByHeight(state, data) {
-      console.log(data)
-      state.searchData = data.result.block_header;
-    },
     blockByHash_or_id(state, data) {
       state.searchData = data.result.block;
     },
@@ -34,7 +30,6 @@ const searchData = {
         .then(response => response.json())
         .then(data => {
           if (data) {
-            console.log(data)
             ctx.commit("blockByHash_or_id", data);
           }
         });
@@ -58,7 +53,6 @@ const searchData = {
         .then(response => response.json())
         .then(data => {
           if (data) {
-            console.log(data)
             this.dispatch("getBlockByHash_or_id", data.result.block_header.hash)
           }
         });

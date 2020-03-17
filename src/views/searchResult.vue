@@ -104,16 +104,20 @@
         </section>
       </section>
     </section>
-<!--     <BlockTransactions class="block-transactions" />
- -->  </div>
+    <Outputs />
+    <TransactionsBlockSearch />
+ </div>
 </template>
 
 <script>
 import Header from "../components/header";
+import Outputs from "../components/explorer/search/outputs";
+
+import TransactionsBlockSearch from "../components/explorer/search/transactionsBlockSearch"
 
 export default {
   components: {
-    Header
+    Header, TransactionsBlockSearch
   },
   data: () => {
     return {

@@ -129,7 +129,6 @@ export default {
       this.$router.push("/result")
     },
     localizeNumber(number) {
-      // US formatting, force commas.
       const numberFormatter = new Intl.NumberFormat("en-US");
       return numberFormatter.format(number);
     },

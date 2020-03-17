@@ -2,7 +2,6 @@
   <div class="explorer">
     <Header class="header" />
     <Stats class="stats" />
-    <SearchResult class="search-result" />
     <Transaction-Pool class="transaction-pool" />
     <RecentBlocks class="recent-blocks" />
   </div>
@@ -11,13 +10,12 @@
 <script>
 import Header from "../components/header";
 import Stats from "../components/explorer/stats";
-import SearchResult from "../components/explorer/searchResult";
 import TransactionPool from "../components/explorer/transactionPool";
 import RecentBlocks from "../components/explorer/recentBlocks";
 
 export default {
   name: "Explorer",
-  components: { Header, Stats, SearchResult, TransactionPool, RecentBlocks },
+  components: { Header, Stats, TransactionPool, RecentBlocks },
 };
 </script>
 
@@ -54,16 +52,14 @@ export default {
 }
 
 @media only screen and (max-width: 700px) {
- .explorer {
-  display: grid;
-  width: 100%;
-  column-gap: 2rem;
-  row-gap: 1rem;
-  grid-template-areas: "head" "stats" " searchResult" "transPool" "recentBlocks";
-  grid-template-columns: 1fr;
-  padding: 0 5%;
-
-  
-}
+  .explorer {
+    display: grid;
+    width: 100%;
+    column-gap: 2rem;
+    row-gap: 1rem;
+    grid-template-areas: "head" "stats" " searchResult" "transPool" "recentBlocks";
+    grid-template-columns: 1fr;
+    padding: 0 5%;
+  }
 }
 </style>
