@@ -98,14 +98,14 @@
           <div class="stats">
             <i class="fas fa-question-circle"></i>
             <p>Reward:</p>
-            <p></p>
+            <p>{{ reward }}</p>
             <p>XKR</p>
           </div>
         </section>
       </section>
     </section>
-    <BlockTransactions class="block-transactions" />
-  </div>
+<!--     <BlockTransactions class="block-transactions" />
+ -->  </div>
 </template>
 
 <script>
@@ -131,7 +131,8 @@ export default {
       effectiveSizeMedian: "",
       rewardPenalty: "",
       baseReward: "",
-      totalFee: ""
+      totalFee: "",
+      reward: "",
     };
   },
   computed: {

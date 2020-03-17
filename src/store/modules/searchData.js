@@ -6,6 +6,7 @@ const searchData = {
   },
   mutations: {
     blockByHeight(state, data) {
+      console.log(data)
       state.searchData = data.result.block_header;
     },
     blockByHash_or_id(state, data) {
@@ -18,7 +19,6 @@ const searchData = {
   actions: {
     getBlockByHash_or_id(ctx, hash) {
       const url = this.state.getSearchData.api + "/json_rpc";
-      console.log(url);
       fetch(url, {
         method: "POST",
         body: JSON.stringify({
@@ -34,6 +34,7 @@ const searchData = {
         .then(response => response.json())
         .then(data => {
           if (data) {
+            console.log(data)
             ctx.commit("blockByHash_or_id", data);
           }
         });
@@ -57,7 +58,8 @@ const searchData = {
         .then(response => response.json())
         .then(data => {
           if (data) {
-            ctx.commit("block", data);
+            console.log(data)
+            this.dispatch("getBlockByHash_or_id", data.result.block_header.hash)
           }
         });
     },

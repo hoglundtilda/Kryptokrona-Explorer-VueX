@@ -10,7 +10,6 @@ const blocksData = {
   },
   mutations: {
     updBlocks(state, data) {
-      console.log(data.result.blocks);
       state.recentBlocks = data.result.blocks;
     },
     clearState(state) {
@@ -89,7 +88,6 @@ const blocksData = {
               .then(response => response.json())
               .then(data => {
                 if (data) {
-                  console.log(data);
                   ctx.commit("updStats", data);
                 }
               });

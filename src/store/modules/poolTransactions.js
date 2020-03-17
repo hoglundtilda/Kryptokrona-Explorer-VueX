@@ -24,6 +24,7 @@ const poolTransactions = {
         .then(response => response.json())
         .then(data => {
           if (data) {
+            console.log(data)
             ctx.commit("poolTransactions", data);
           }
         })

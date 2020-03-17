@@ -126,7 +126,7 @@ export default {
     },
     searchByHash(hash) {
       this.$store.dispatch("getBlockByHash_or_id", hash);
-    
+      this.$router.push("/result")
     },
     localizeNumber(number) {
       // US formatting, force commas.

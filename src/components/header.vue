@@ -22,11 +22,11 @@
 import Menu from "./menu.vue";
 export default {
   components: {
-    Menu
+    Menu,
   },
   data: () => {
     return {
-      searchInput: ""
+      searchInput: "",
     };
   },
   methods: {
@@ -34,16 +34,16 @@ export default {
       const path = `/result`;
       if (this.searchInput.length < 64) {
         this.$store.dispatch("getBlockByHeight", this.searchInput);
-
-      
+        if (this.$route.path !== path)
+          this.$router.push(path, this.searchInput);
       } else if (this.searchInput.length == 64) {
         this.$store.dispatch("getBlockByHash_or_id", this.searchInput);
       
       } else {
         console.log("Wrong search input");
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
