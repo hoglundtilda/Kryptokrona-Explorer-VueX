@@ -226,6 +226,7 @@ export default {
 
     i {
       padding-right: 0.5rem;
+      font-size: 1.5rem;
     }
   }
 

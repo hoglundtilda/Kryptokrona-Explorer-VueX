@@ -28,7 +28,7 @@ export default {
   column-gap: 2rem;
   row-gap: 1rem;
   grid-template-areas: "head head" "stats searchResult" "transPool transPool" "recentBlocks recentBlocks";
-  grid-template-columns: 42% 58%;
+  grid-template-columns: 1fr 1fr;
 }
 
 .header {
@@ -53,13 +53,8 @@ export default {
 
 @media only screen and (max-width: 700px) {
   .explorer {
-    display: grid;
-    width: 100%;
-    column-gap: 2rem;
-    row-gap: 1rem;
-    grid-template-areas: "head" "stats" " searchResult" "transPool" "recentBlocks";
     grid-template-columns: 1fr;
-    padding: 0 5%;
+column-gap: 0;
   }
 }
 </style>

@@ -2,7 +2,11 @@
   <div class="header">
     <div class="img">
       <img src="../assets/logo-text-light-new.svg" alt="kryptokrona logo" />
+      <div class="hamburger">
+        <i class="fas fa-bars"></i>
+      </div>
     </div>
+
     <Menu class="menu" />
     <div class="search">
       <input
@@ -38,7 +42,6 @@ export default {
           this.$router.push(path, this.searchInput);
       } else if (this.searchInput.length == 64) {
         this.$store.dispatch("getBlockByHash_or_id", this.searchInput);
-      
       } else {
         console.log("Wrong search input");
       }
@@ -90,8 +93,7 @@ export default {
       font-size: 1.2rem;
       opacity: 0.3;
       color: $placeholder;
-      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-        "Lucida Sans", Arial, sans-serif;
+      font-family: $fontFamily;
     }
 
     .search-btn {
@@ -109,6 +111,50 @@ export default {
 
     :hover {
       background: $dark;
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .header {
+    flex-direction: column;
+    height: 12vh;
+    margin-bottom: 1rem;
+
+    .img {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 60%;
+        margin: auto;
+      }
+
+      .hamburger {
+        display: flex;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 100%;
+        color: $white;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        align-self: flex-start;
+        margin-right: 0.5rem;
+        i {
+          font-size: 3rem;
+        }
+      }
+    }
+    .menu {
+      display: none;
+    }
+
+    .search {
+      width: 95%;
     }
   }
 }

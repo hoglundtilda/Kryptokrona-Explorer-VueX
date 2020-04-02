@@ -145,7 +145,7 @@ export default {
     padding: 2rem 3.2rem;
     display: grid;
     row-gap: 1.8rem;
-    grid-template-columns: 18% 18% 18% 42%;
+    grid-template-columns: 18% 18% 18% 46%;
 
     .stats {
       display: flex;
@@ -161,7 +161,7 @@ export default {
     padding: 2rem 3.2rem;
     display: grid;
     row-gap: 1.8rem;
-    grid-template-columns: 18% 18% 18% 42%;
+    grid-template-columns: 18% 18% 18% 46%;
   }
 }
 </style>

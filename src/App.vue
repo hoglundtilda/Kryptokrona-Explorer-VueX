@@ -10,7 +10,8 @@ export default {};
 
 <style lang="scss">
 @import "./assets/scss/variables.scss";
-@import url("https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -20,24 +21,18 @@ export default {};
 
 html {
   background: $black;
-
+  width: 100vw;
+  display: flex;
+  justify-content: center;
 }
 
 #app {
- max-width: 100vw;
-  padding: 0 15%;
   height: auto;
   display: flex;
+  padding: 2rem;
   flex-direction: column;
   justify-content: center;
   background: $black;
   font-family: $fontFamily;
-}
-
-@media screen and (max-width: 700px) {
- #app {
-
-   padding: 0;
- }
 }
 </style>

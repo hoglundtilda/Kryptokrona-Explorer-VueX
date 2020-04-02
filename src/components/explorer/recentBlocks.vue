@@ -3,22 +3,25 @@
     <section class="table-header">
       <i class="fas fa-link"></i>
       <h2>Recent Blocks</h2>
-      <p class="range">Viewing Range: 311.003 - 310.344</p>
+      <p class="range">
+        Viewing Range: {{ blocks[0].height }} -
+        {{ blocks[blocks.length - 1].height }}
+      </p>
     </section>
     <div class="search">
       <button @click="newerBlocks" class="btn">
         <i class="fas fa-arrow-left"></i>
         Newer
       </button>
-      <div class="numb">
+      <!--  <div class="numb">
         <p>No</p>
-      </div>
+      </div> -->
       <!-- input binded to data: "input", will take input in method go()-->
       <input
         @keyup.enter="go"
         v-model="input"
         type="text"
-        placeholder="Height"
+        placeholder="Height (numbers only)"
       />
       <button @click="go" class="btn">Go</button>
       <button @click="olderBlocks" class="btn">
@@ -27,30 +30,32 @@
       </button>
     </div>
     <section class="content">
-      <div class="stats">
-        <i class="fas fa-bars"></i>
-        <p>Height</p>
-      </div>
-      <div class="stats">
-        <i class="fas fa-archive"></i>
-        <p>Size</p>
-      </div>
-      <div class="stats">
-        <i class="fas fa-paw"></i>
-        <p>Hash</p>
-      </div>
-      <div class="stats">
-        <i class="fas fa-unlock"></i>
-        <p>Difficulty</p>
-      </div>
-      <div class="stats">
-        <i class="fas fa-bars"></i>
-        <p>TXS</p>
-      </div>
-      <div class="stats">
-        <i class="fas fa-clock"></i>
-        <p>Date</p>
-      </div>
+      <section class="stats-grid">
+        <div class="stats">
+          <i class="fas fa-bars"></i>
+          <p>Height</p>
+        </div>
+        <div class="stats">
+          <i class="fas fa-archive"></i>
+          <p>Size</p>
+        </div>
+        <div class="stats">
+          <i class="fas fa-paw"></i>
+          <p>Hash</p>
+        </div>
+        <div class="stats">
+          <i class="fas fa-unlock"></i>
+          <p>Difficulty</p>
+        </div>
+        <div class="stats">
+          <i class="fas fa-bars"></i>
+          <p>TXS</p>
+        </div>
+        <div class="stats">
+          <i class="fas fa-clock"></i>
+          <p>Date</p>
+        </div>
+      </section>
       <section class="block-table">
         <!--getting [recentBlocks] from store in computed -->
         <li v-for="(block, index) in blocks" :key="index" class="block-content">
@@ -126,7 +131,7 @@ export default {
     },
     searchByHash(hash) {
       this.$store.dispatch("getBlockByHash_or_id", hash);
-      this.$router.push("/result")
+      this.$router.push("/result");
     },
     localizeNumber(number) {
       const numberFormatter = new Intl.NumberFormat("en-US");
@@ -187,7 +192,7 @@ export default {
     ::placeholder {
       color: $white;
       opacity: 0.5;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       font-family: $fontFamily;
     }
 
@@ -198,24 +203,26 @@ export default {
       padding: 0.7rem 1rem;
       align-items: center;
       cursor: pointer;
+      font-size: 1.4rem;
 
       i {
         padding: 0 0.5rem;
+        font-size: 1.4rem;
       }
     }
   }
 
   .content {
-    margin: 0 2.2rem;
-    padding: 2rem 3.2rem;
-    display: grid;
-    justify-content: center;
-    grid-template-columns: 10rem 10rem 52rem 14rem 8rem 25rem;
+    padding: 2rem 2rem;
 
+    .stats-grid {
+      display: grid;
+      width: 100%;
+      grid-template-columns: 8% 8% 48% 10% 6% 18%;
+    }
     .stats {
       display: flex;
-      margin: 1rem 0;
-
+      align-items: center;
       p {
         padding-right: 0.5rem;
       }
@@ -224,15 +231,21 @@ export default {
         padding-right: 1.5rem;
       }
     }
+  }
 
-    .block-table {
-      display: flex;
-      flex-direction: column;
+  .block-table {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-      .block-content {
-        display: grid;
-        grid-template-columns: 10rem 10rem 52rem 14rem 8rem 25rem;
-        margin: 0.8rem 0;
+    .block-content {
+      display: grid;
+      width: 100%;
+      grid-template-columns: 8% 8% 48% 10% 6% 18%;
+      margin: 0.8rem 0;
+
+      .hash-a {
+        padding-right: 1rem;
       }
     }
   }
@@ -243,9 +256,33 @@ export default {
     margin: 1.8rem 0;
 
     .btn {
-      padding: 1rem 1.2rem;
+      padding: 0.8rem 1.2rem;
       cursor: pointer;
     }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .stats-grid {
+    grid-template-columns: 8% 6% 52% 8% 6% 18%;
+  }
+  .stats {
+    i {
+      display: none;
+    }
+  }
+}
+
+.block-table {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .block-content {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 8% 6% 52% 8% 6% 18%;
+    margin: 0.8rem 0;
   }
 }
 </style>
