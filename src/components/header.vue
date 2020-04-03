@@ -60,6 +60,10 @@ export default {
   width: 100%;
   height: 8rem;
 
+  .hamburger {
+    display: none;
+  }
+
   .img {
     width: 20%;
     cursor: pointer;

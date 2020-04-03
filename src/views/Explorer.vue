@@ -54,7 +54,7 @@ export default {
 @media only screen and (max-width: 700px) {
   .explorer {
     grid-template-columns: 1fr;
-column-gap: 0;
+    column-gap: 0;
   }
 }
 </style>

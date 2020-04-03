@@ -21,7 +21,7 @@ export default {};
 
 html {
   background: $black;
-  width: 100vw;
+  max-width: 100vw;
   display: flex;
   justify-content: center;
 }
