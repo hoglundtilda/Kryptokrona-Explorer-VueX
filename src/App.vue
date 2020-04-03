@@ -35,4 +35,10 @@ html {
   background: $black;
   font-family: $fontFamily;
 }
+
+@media only screen and (max-width: 700px) {
+  #app {
+    padding: 0;
+  }
+}
 </style>

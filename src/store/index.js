@@ -8,7 +8,9 @@ import searchData from "./modules/searchData";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
+  state: {
+    nav: false
+  },
   mutations: {},
 
   actions: {},

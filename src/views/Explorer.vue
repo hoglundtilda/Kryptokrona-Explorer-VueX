@@ -1,9 +1,15 @@
 <template>
+<div>
+        <transition name="fade">
+      <NavOverlay v-if="this.$store.state.nav" @closeNav="nav" class="nav-overlay" />
+    </transition>
   <div class="explorer">
+
     <Header class="header" />
     <Stats class="stats" />
     <Transaction-Pool class="transaction-pool" />
     <RecentBlocks class="recent-blocks" />
+  </div>
   </div>
 </template>
 
@@ -12,19 +18,37 @@ import Header from "../components/header";
 import Stats from "../components/explorer/stats";
 import TransactionPool from "../components/explorer/transactionPool";
 import RecentBlocks from "../components/explorer/recentBlocks";
+import NavOverlay from "../components/navOverlay";
 
 export default {
   name: "Explorer",
-  components: { Header, Stats, TransactionPool, RecentBlocks },
+  components: { Header, Stats, TransactionPool, RecentBlocks, NavOverlay },
+   data: () => {
+    return {
+    };
+  },
+  methods: {
+   
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 @import "../assets/scss/variables.scss";
+@import "../assets/scss/transitions.scss";
+
+.nav-overlay {
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  background-color: $black;
+}
 
 .explorer {
   display: grid;
   width: 100%;
+  padding: 2rem;
   column-gap: 2rem;
   row-gap: 1rem;
   grid-template-areas: "head head" "stats searchResult" "transPool transPool" "recentBlocks recentBlocks";

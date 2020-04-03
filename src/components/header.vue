@@ -2,7 +2,7 @@
   <div class="header">
     <div class="img">
       <img src="../assets/logo-text-light-new.svg" alt="kryptokrona logo" />
-      <div class="hamburger">
+      <div @click="nav" class="hamburger">
         <i class="fas fa-bars"></i>
       </div>
     </div>
@@ -24,13 +24,14 @@
 
 <script>
 import Menu from "./menu.vue";
+
 export default {
   components: {
-    Menu,
+    Menu
   },
   data: () => {
     return {
-      searchInput: "",
+      searchInput: ""
     };
   },
   methods: {
@@ -46,6 +47,9 @@ export default {
         console.log("Wrong search input");
       }
     },
+     nav() {
+     this.$store.state.nav = true
+    }
   },
 };
 </script>
@@ -122,8 +126,7 @@ export default {
 @media only screen and (max-width: 700px) {
   .header {
     flex-direction: column;
-    height: 12vh;
-    margin-bottom: 1rem;
+    height: 15vh;
 
     .img {
       width: 100%;
@@ -133,8 +136,7 @@ export default {
       align-items: center;
 
       img {
-        width: 60%;
-        margin: auto;
+        width: 50%;
       }
 
       .hamburger {
@@ -155,10 +157,15 @@ export default {
     }
     .menu {
       display: none;
+      justify-content: center;
     }
 
     .search {
-      width: 95%;
+      width: 100%;
+      .search-input {
+        width: 100%;
+        
+      }
     }
   }
 }

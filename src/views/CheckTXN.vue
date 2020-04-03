@@ -1,71 +1,80 @@
 <template>
-  <div class="checkTXN">
-    <Header class="header" />
-    <section class="check-transactions">
-      <h1 class="checkTxn-headline">
-        <i class="fas fa-exchange-alt"></i>Check Transactions
-      </h1>
-      <div class="checkTxn-inputs">
-        <p class="checkTxn-label">Transaction Hash:</p>
-        <input
-          v-model="transaction_hash"
-          type="text"
-          class="search-input"
-          placeholder="64 character transaction id"
-        />
-      </div>
-      <div class="checkTxn-inputs">
-        <div class="radio-buttons">
-          <p class="checkTxn-label">Private Key:</p>
-          <input class="checkTxn-label" type="radio" />
-          <p class="checkTxn-label">TXN Key</p>
-          <input class="checkTxn-label" type="radio" />
-          <p class="checkTxn-label">View Key</p>
+  <div class="wrapper">
+    <transition name="fade">
+      <NavOverlay v-if="this.$store.state.nav" @closeNav="nav" class="nav-overlay" />
+    </transition>
+    <div class="checkTXN">
+      <Header class="header" />
+      <section class="check-transactions">
+        <h1 class="checkTxn-headline">
+          <i class="fas fa-exchange-alt"></i>Check Transactions
+        </h1>
+        <div class="checkTxn-inputs">
+          <p class="checkTxn-label">Transaction Hash:</p>
+          <input
+            v-model="transaction_hash"
+            type="text"
+            class="search-input"
+            placeholder="64 character transaction id"
+          />
         </div>
-        <input
-          v-model="private_key"
-          type="text"
-          class="search-input"
-          placeholder="64 character private view or TXN key"
-        />
-      </div>
-      <div class="checkTxn-inputs">
-        <p class="checkTxn-label">Recipient Public Adress:</p>
-        <input
-          v-model="public_adress"
-          type="text"
-          class="search-input long-length"
-          placeholder="99 character public KKR adress"
-        />
-      </div>
-      <button @click="checkTransaction" class="btn">Check Transaction</button>
-    </section>
-    <section class="table">
-      <section class="table-header">
-        <i class="fas fa-database"></i>
-        <h2>Owned Outputs for</h2>
-        <i class="fas fa-question question"></i>
+        <div class="checkTxn-inputs">
+          <div class="radio-buttons">
+            <p class="checkTxn-label">Private Key:</p>
+            <input class="checkTxn-label" type="radio" />
+            <p class="checkTxn-label">TXN Key</p>
+            <input class="checkTxn-label" type="radio" />
+            <p class="checkTxn-label">View Key</p>
+          </div>
+          <input
+            v-model="private_key"
+            type="text"
+            class="search-input"
+            placeholder="64 character private view or TXN key"
+          />
+        </div>
+        <div class="checkTxn-inputs">
+          <p class="checkTxn-label">Recipient Public Adress:</p>
+          <input
+            v-model="public_adress"
+            type="text"
+            class="search-input long-length"
+            placeholder="99 character public KKR adress"
+          />
+        </div>
+        <button @click="checkTransaction" class="btn">Check Transaction</button>
       </section>
-      <section class="content">
-        <div class="stats">
-          <i class="fas fa-money-bill-alt"></i>
-          <p>Amount</p>
-        </div>
-        <div class="stats">
-          <i class="fas fa-key"></i>
-          <p>Key</p>
-        </div>
-      </section>
-    </section>
+      <div class="outputs">
+        <section class="table">
+          <section class="table-header">
+            <i class="fas fa-database"></i>
+            <h2>Owned Outputs for</h2>
+            <i class="fas fa-question question"></i>
+          </section>
+          <section class="content">
+            <div class="stats">
+              <i class="fas fa-money-bill-alt"></i>
+              <p>Amount</p>
+            </div>
+            <div class="stats">
+              <i class="fas fa-key"></i>
+              <p>Key</p>
+            </div>
+          </section>
+        </section>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import NavOverlay from "../components/navOverlay";
 import Header from "../components/header";
 
 export default {
   name: "Explorer",
   components: {
+    NavOverlay,
     Header
   },
   data: () => {
@@ -86,22 +95,25 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/scss/variables.scss";
 @import "../assets/scss/textStyles.scss";
+@import "../assets/scss/transitions.scss";
+
+.nav-overlay {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: $black;
+}
 
 .checkTXN {
-  display: grid;
-  width: 100%;
-  column-gap: 2rem;
-  row-gap: 2rem;
-  grid-template-areas: "head" "check" "blocks";
-}
-
-.header {
-  grid-area: head;
-}
-
-.checkTransactions {
   display: flex;
-  grid-area: check;
+  flex-direction: column;
+  width: 100%;
+}
+
+.check-transactions {
+  margin-top: 5rem;
+  max-width: 100%;
 }
 
 .checkTxn-headline {
@@ -117,6 +129,7 @@ export default {
 
 .checkTxn-inputs {
   display: flex;
+  width: 100%;
   flex-direction: column;
   .checkTxn-label {
     color: $white;
@@ -141,7 +154,7 @@ export default {
 
   .search-input {
     height: 3.2rem;
-    width: 85rem;
+    max-width: 85rem;
     font-family: $fontFamily;
     font-size: 1.6rem;
     background: $dark;
@@ -151,7 +164,7 @@ export default {
   }
 
   .long-length {
-    width: 85rem;
+    max-width: 85rem;
   }
 
   ::placeholder {
@@ -159,8 +172,7 @@ export default {
     letter-spacing: 2px;
     opacity: 0.3;
     color: $placeholder;
-    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-      "Lucida Sans", Arial, sans-serif;
+    font-family: $fontFamily;
   }
 }
 
@@ -171,7 +183,6 @@ export default {
 }
 
 .table {
-  grid-area: blocks;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -194,6 +205,7 @@ export default {
 
     .question {
       margin-left: auto;
+      display: none;
     }
   }
 }
@@ -215,6 +227,18 @@ export default {
     i {
       padding-right: 1.5rem;
     }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+
+  .checkTXN {
+    padding: 2rem;
+    width: 100vw;
+  }
+
+  .content {
+    padding: 1rem 0.5rem;
   }
 }
 </style>
