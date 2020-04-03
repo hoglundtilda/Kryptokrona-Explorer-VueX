@@ -1,15 +1,14 @@
 <template>
-<div>
-        <transition name="fade">
+  <div>
+    <transition name="fade">
       <NavOverlay v-if="this.$store.state.nav" @closeNav="nav" class="nav-overlay" />
     </transition>
-  <div class="explorer">
-
-    <Header class="header" />
-    <Stats class="stats" />
-    <Transaction-Pool class="transaction-pool" />
-    <RecentBlocks class="recent-blocks" />
-  </div>
+    <div class="explorer">
+      <Header class="header" />
+      <Stats class="stats" />
+      <Transaction-Pool class="transaction-pool" />
+      <RecentBlocks class="recent-blocks" />
+    </div>
   </div>
 </template>
 
@@ -23,13 +22,10 @@ import NavOverlay from "../components/navOverlay";
 export default {
   name: "Explorer",
   components: { Header, Stats, TransactionPool, RecentBlocks, NavOverlay },
-   data: () => {
-    return {
-    };
+  data: () => {
+    return {};
   },
-  methods: {
-   
-  }
+  methods: {}
 };
 </script>
 

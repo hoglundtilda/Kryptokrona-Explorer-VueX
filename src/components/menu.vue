@@ -12,13 +12,8 @@
         </a>
       </li>
       <li>
-        <a>
-          <i class="fas fa-gavel"></i>Pools
-        </a>
-      </li>
-      <li>
-        <a>
-          <span class="apiIcon">&#60;/&#62;</span>API
+        <a >
+          <i class="fas fa-gavel"></i>Pool
         </a>
       </li>
     </nav>

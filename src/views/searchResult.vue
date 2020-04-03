@@ -1,123 +1,122 @@
 <template>
-  <div class="search">
-    <Header class="header" />
-    <section class="result">
-      <div class="headline">
-        <h1 class="search-headline">
-          <i class="fas fa-cube"></i>Block
-        </h1>
-        <h2>{{ searchData.hash }}</h2>
-      </div>
-      <section class="content">
-        <section class="left">
-          <div class="stats">
-            <i class="fas fa-question-circle"></i>
-            <p>Height:</p>
-            <p>{{ height }}</p>
-          </div>
-          <div class="stats">
-            <i class="fas fa-question-circle"></i>
-            <p>Timestamp:</p>
-            <p>{{ timestamp }}</p>
-          </div>
-          <div class="stats">
-            <i class="fas fa-question-circle"></i>
-            <p>Version:</p>
-            <p>{{ searchData.major_version }}.{{ searchData.minor_version }}</p>
-          </div>
-          <div class="stats">
-            <i class="fas fa-question-circle"></i>
-            <p>Difficulty:</p>
-            <p>{{ difficulty }}</p>
-          </div>
-          <div class="stats">
-            <i class="fas fa-question-circle"></i>
-            <p>Orphan:</p>
-            <p>{{ orphan }}</p>
-          </div>
-          <div class="stats">
-            <i class="fas fa-question-circle"></i>
-            <p>Transactions:</p>
-            <p>{{ transactions }}</p>
-          </div>
-          <div class="stats">
-            <i class="fas fa-question-circle"></i>
-            <p>Total network supply:</p>
-            <p>{{ supply }}</p>
-            <p>XKR</p>
-          </div>
-          <div class="stats">
-            <i class="fas fa-question-circle"></i>
-            <p>Total network transactions:</p>
-            <p>{{ totTransactions }}</p>
-          </div>
-        </section>
-        <section class="right">
-          <div class="stats">
-            <i class="fas fa-question-circle"></i>
-            <p>Total transactions size:</p>
-            <p>{{ transactionSize }}</p>
-            <p>bytes</p>
-          </div>
-          <div class="stats">
-            <i class="fas fa-question-circle"></i>
-            <p>Total block size:</p>
-            <p>{{ blockSize }}</p>
-            <p>bytes</p>
-          </div>
-          <div class="stats">
-            <i class="fas fa-question-circle"></i>
-            <p>Current txs median:</p>
-            <p>{{ txsMedian }}</p>
-            <p>bytes</p>
-          </div>
-          <div class="stats">
-            <i class="fas fa-question-circle"></i>
-            <p>Effective txs median:</p>
-            <p>{{ effectiveSizeMedian }}</p>
-            <p>bytes</p>
-          </div>
-          <div class="stats">
-            <i class="fas fa-question-circle"></i>
-            <p>Reward penalty:</p>
-            <p>{{ rewardPenalty }}</p>
-            <p>%</p>
-          </div>
-          <div class="stats">
-            <i class="fas fa-question-circle"></i>
-            <p>Base reward:</p>
-            <p>{{ baseReward }}</p>
-            <p>XKR</p>
-          </div>
-          <div class="stats">
-            <i class="fas fa-question-circle"></i>
-            <p>Transaction fee:</p>
-            <p>{{ totalFee }}</p>
-            <p>XKR</p>
-          </div>
-          <div class="stats">
-            <i class="fas fa-question-circle"></i>
-            <p>Reward:</p>
-            <p>{{ reward }}</p>
-            <p>XKR</p>
-          </div>
+  <div>
+    <transition name="fade">
+      <NavOverlay v-if="this.$store.state.nav" @closeNav="nav" class="nav-overlay" />
+    </transition>
+    <div class="search">
+      <Header class="header" />
+      <section class="result">
+        <div class="headline">
+          <h1 class="search-headline">
+            <i class="fas fa-cube"></i>Block
+          </h1>
+          <h2 class="hash-a">{{ searchData.hash }}</h2>
+        </div>
+        <section class="content">
+          <section class="left">
+            <div class="stats">
+              <i class="fas fa-question-circle"></i>
+              <p>Height:</p>
+              <p>{{ height }}</p>
+            </div>
+            <div class="stats">
+              <i class="fas fa-question-circle"></i>
+              <p>Timestamp:</p>
+              <p>{{ timestamp }}</p>
+            </div>
+            <div class="stats">
+              <i class="fas fa-question-circle"></i>
+              <p>Version:</p>
+              <p>{{ searchData.major_version }}.{{ searchData.minor_version }}</p>
+            </div>
+            <div class="stats">
+              <i class="fas fa-question-circle"></i>
+              <p>Difficulty:</p>
+              <p>{{ difficulty }}</p>
+            </div>
+            <div class="stats">
+              <i class="fas fa-question-circle"></i>
+              <p>Orphan:</p>
+              <p>{{ orphan }}</p>
+            </div>
+            <div class="stats">
+              <i class="fas fa-question-circle"></i>
+              <p>Transactions:</p>
+              <p>{{ transactions }}</p>
+            </div>
+            <div class="stats">
+              <i class="fas fa-question-circle"></i>
+              <p>Total network supply:</p>
+              <p>{{ supply }} XKR</p>
+            </div>
+            <div class="stats">
+              <i class="fas fa-question-circle"></i>
+              <p>Total network transactions:</p>
+              <p>{{ totTransactions }}</p>
+            </div>
+          </section>
+          <section class="right">
+            <div class="stats">
+              <i class="fas fa-question-circle"></i>
+              <p>Total transactions size:</p>
+              <p>{{ transactionSize }} bytes</p>
+            </div>
+            <div class="stats">
+              <i class="fas fa-question-circle"></i>
+              <p>Total block size:</p>
+              <p>{{ blockSize }} bytes</p>
+            </div>
+            <div class="stats">
+              <i class="fas fa-question-circle"></i>
+              <p>Current txs median:</p>
+              <p>{{ txsMedian }} bytes</p>
+            </div>
+            <div class="stats">
+              <i class="fas fa-question-circle"></i>
+              <p>Effective txs median:</p>
+              <p>{{ effectiveSizeMedian }} bytes</p>
+            </div>
+            <div class="stats">
+              <i class="fas fa-question-circle"></i>
+              <p>Reward penalty:</p>
+              <p>{{ rewardPenalty }} %</p>
+            </div>
+            <div class="stats">
+              <i class="fas fa-question-circle"></i>
+              <p>Base reward:</p>
+              <p>{{ baseReward }} XKR</p>
+            </div>
+            <div class="stats">
+              <i class="fas fa-question-circle"></i>
+              <p>Transaction fee:</p>
+              <p>{{ totalFee }} XKR</p>
+            </div>
+            <div class="stats">
+              <i class="fas fa-question-circle"></i>
+              <p>Reward:</p>
+              <p>{{ reward }} XKR</p>
+            </div>
+          </section>
         </section>
       </section>
-    </section>
-    <Outputs />
-    <TransactionsBlockSearch />
- </div>
+      <Outputs />
+      <TransactionsBlockSearch />
+    </div>
+  </div>
 </template>
 
 <script>
+import NavOverlay from "../components/navOverlay";
 import Header from "../components/header";
 import Outputs from "../components/explorer/search/outputs";
 
-import TransactionsBlockSearch from "../components/explorer/search/transactionsBlockSearch"
+import TransactionsBlockSearch from "../components/explorer/search/transactionsBlockSearch";
 
 export default {
   components: {
-    Header, TransactionsBlockSearch
+    NavOverlay,
+    Header,
+    TransactionsBlockSearch
   },
   data: () => {
     return {
@@ -136,7 +135,7 @@ export default {
       rewardPenalty: "",
       baseReward: "",
       totalFee: "",
-      reward: "",
+      reward: ""
     };
   },
   computed: {
@@ -195,6 +194,15 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/scss/variables.scss";
 @import "../assets/scss/textStyles.scss";
+@import "../assets/scss/transitions.scss";
+
+.nav-overlay {
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  background-color: $black;
+}
 
 .search {
   display: grid;
@@ -203,29 +211,36 @@ export default {
   row-gap: 1rem;
 }
 
+.header {
+  width: 100%;
+}
+
 .headline {
+  width: 100%;
   display: flex;
   align-items: center;
   align-items: flex-end;
 
   .search-headline {
     display: flex;
+    width: 100%;
     margin-right: 2rem;
     font-size: $defaultHeadlineSize;
     color: $menu;
     letter-spacing: 2px;
-
+    flex-wrap: wrap;
     i {
       font-size: $defaultHeadlineIcon;
       padding-right: 1rem;
     }
   }
 
-  h2 {
+  .hash-a {
     color: $white;
     font-size: 1.8rem;
     font-weight: 500;
     opacity: 0.5;
+    word-wrap: break-word;
   }
 }
 
@@ -250,11 +265,41 @@ export default {
     }
 
     i {
-      display: flex;
+      display: none;
       justify-content: center;
       align-self: center;
       width: 4rem;
     }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .headline {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 3rem;
+    h1 {
+      align-self: flex-start;
+    }
+
+    h2 {
+      width: 100%;
+    }
+  }
+
+  .search {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    padding: 2rem;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .stats {
+    flex-direction: column;
   }
 }
 </style>
