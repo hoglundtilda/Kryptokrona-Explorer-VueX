@@ -31,7 +31,7 @@
       <p class="stats-dark">{{ transaction.amount_out }}</p>
       <p class="stats-dark">{{ transaction.fee }}</p>
       <p class="stats-dark">{{ transaction.size }}</p>
-      <a  class="hash-a">{{
+      <a @click="getOutputs(transaction.hash)" class="hash-a">{{
         transaction.hash
       }}</a>
     </li>
@@ -92,7 +92,10 @@ export default {
       return numberFormatter.format(number);
     },
     // --------------------------------------------------
-
+getOutputs(hash) {
+  this.$store.dispatch("getOutputs", hash)
+  this.$router.push("blockchain_transaction")
+}
   },
 };
 </script>

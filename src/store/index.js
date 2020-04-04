@@ -4,13 +4,15 @@ import Vuex from "vuex";
 import blocksData from "./modules/getBlocksData";
 import poolTransactions from "./modules/poolTransactions";
 import searchData from "./modules/searchData";
-import checkTXN from "./modules/checkTXN";
+import outputs from "./modules/getOutputs";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    nav: false
+    nav: false,
+    api: "http://explorer.kryptokrona.se:11898"
+
   },
   mutations: {},
 
@@ -19,6 +21,6 @@ export default new Vuex.Store({
     getBlocksData: blocksData,
     getPoolTransactions: poolTransactions,
     getSearchData: searchData,
-    getTXNData: checkTXN
+    getOutputs: outputs
   }
 });

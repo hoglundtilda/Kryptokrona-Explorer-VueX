@@ -99,7 +99,6 @@
           </section>
         </section>
       </section>
-      <Outputs />
       <TransactionsBlockSearch />
     </div>
   </div>
@@ -108,8 +107,6 @@
 <script>
 import NavOverlay from "../components/navOverlay";
 import Header from "../components/header";
-import Outputs from "../components/explorer/search/outputs";
-
 import TransactionsBlockSearch from "../components/explorer/search/transactionsBlockSearch";
 
 export default {

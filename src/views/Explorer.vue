@@ -6,6 +6,7 @@
     <div class="explorer">
       <Header class="header" />
       <Stats class="stats" />
+      <Graph class="graph" />
       <Transaction-Pool class="transaction-pool" />
       <RecentBlocks class="recent-blocks" />
     </div>
@@ -15,13 +16,14 @@
 <script>
 import Header from "../components/header";
 import Stats from "../components/explorer/stats";
+import Graph from "../components/explorer/graph";
 import TransactionPool from "../components/explorer/transactionPool";
 import RecentBlocks from "../components/explorer/recentBlocks";
 import NavOverlay from "../components/navOverlay";
 
 export default {
   name: "Explorer",
-  components: { Header, Stats, TransactionPool, RecentBlocks, NavOverlay },
+  components: { Header, Stats, Graph, TransactionPool, RecentBlocks, NavOverlay },
   data: () => {
     return {};
   },
@@ -47,7 +49,7 @@ export default {
   padding: 2rem;
   column-gap: 2rem;
   row-gap: 1rem;
-  grid-template-areas: "head head" "stats searchResult" "transPool transPool" "recentBlocks recentBlocks";
+  grid-template-areas: "head head" "stats graph" "transPool transPool" "recentBlocks recentBlocks";
   grid-template-columns: 1fr 1fr;
 }
 
@@ -57,6 +59,10 @@ export default {
 
 .stats {
   grid-area: stats;
+}
+
+.graph {
+  grid-area: graph;
 }
 
 .search-result {
