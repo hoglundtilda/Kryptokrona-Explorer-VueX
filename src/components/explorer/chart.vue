@@ -23,9 +23,18 @@
 export default {
   data: () => {
     return {
-      show: false,
+      show: false
     };
   },
+  computed: {
+    chartData() {
+      return this.$store.state.getBlocksData.recentBlocks;
+    }
+  },
+  created() {
+    this.$store.dispatch("fetchLiveStats");
+    console.log("here" + this.$store.state.getBlocksData.recentBlocks);
+  }
 };
 </script>
 

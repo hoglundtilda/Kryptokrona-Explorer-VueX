@@ -84,7 +84,7 @@ export default {
     color: $white;
     height: 60rem;
     p {
-      font-size: 3.2rem;
+      font-size: 2.6rem;
       font-weight: 500;
       font-family: $fontFamily;
       cursor: pointer;

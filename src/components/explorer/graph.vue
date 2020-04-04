@@ -5,7 +5,7 @@
       <h2>Graph</h2>
       
     </section>
-    <section class="content">
+    <section class="content" >
     
     </section>
   </div>

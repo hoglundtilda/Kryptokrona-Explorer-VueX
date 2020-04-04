@@ -3,7 +3,7 @@
     <transition name="fade">
       <NavOverlay v-if="this.$store.state.nav" @closeNav="nav" class="nav-overlay" />
     </transition>
-    <div class="outputs">
+    <div class="transactions">
       <Header class="header" />
       <section class="result">
         <section class="transaction">
@@ -13,24 +13,66 @@
             </h1>
           </div>
           <div class="stats">
-              <p>Hash: {{transaction.hash}}</p>
-              <p>Confirmations: {{transaction.confirmations}}</p>
-              <p>Fee: {{transaction.fee}}</p>
-              <p>Sum of Outputs: {{transaction.sumOutputs}}</p>
-              <p>Size: {{transaction.size}}</p>
+            <p>Hash: {{transaction.hash}}</p>
+            <p>Confirmations: {{transaction.confirmations}}</p>
+            <p>Fee: {{transaction.fee}} XKR</p>
+            <p>Sum of Outputs: {{transaction.sumOutputs}} XKR</p>
+            <p>Size: {{transaction.size}}</p>
           </div>
         </section>
         <section class="block">
-            <div class="headline">
+          <div class="headline">
             <h1 class="transaction-headline">
               <i class="fas fa-cubes"></i>In Block
             </h1>
           </div>
+          <div class="stats">
+            <p>Hash: {{block.hash}}</p>
+            <p>Height: {{block.height}}</p>
+            <p>Timestamp: {{block.timestamp}}</p>
+          </div>
+        </section>
+
+        <!-- Inputs -->
+        <section v-if="vIn.length > 1" class="table">
+          <div class="table-header">
+            <h2>Inputs ({{vIn.length}})</h2>
+          </div>
+          <section class="content">
             <div class="stats">
-                <p>Hash: {{block.hash}}</p>
-                <p>Height: {{block.height}}</p>
-                <p>Timestamp: {{block.timestamp}}</p>
+              <p>
+                <i class="fas fa-money-bill-alt"></i>Amount
+              </p>
+              <p>
+                <i class="fas fa-key"></i>Key
+              </p>
             </div>
+            <li v-for="(transaction, index) in vIn" :key="index" class="outputs">
+              <p class="stats-dark">{{transaction.amount}} XKR</p>
+              <p class="hash">{{transaction.key}}</p>
+            </li>
+          </section>
+        </section>
+
+        <!-- Outputs -->
+        <section class="table">
+          <div class="table-header">
+            <h2>Outputs ({{vOut.length}})</h2>
+          </div>
+          <section class="content">
+            <div class="stats">
+              <p>
+                <i class="fas fa-money-bill-alt"></i>Amount
+              </p>
+              <p>
+                <i class="fas fa-key"></i>Key
+              </p>
+            </div>
+            <li v-for="(transaction, index) in vOut" :key="index" class="outputs">
+              <p class="stats-dark">{{transaction.amount}} XKR</p>
+              <p class="hash">{{transaction.key}}</p>
+            </li>
+          </section>
         </section>
       </section>
     </div>
@@ -40,59 +82,78 @@
 <script>
 import NavOverlay from "../components/navOverlay";
 import Header from "../components/header";
-import TransactionsBlockSearch from "../components/explorer/search/transactionsBlockSearch";
 
 export default {
   components: {
     NavOverlay,
-    Header,
-    TransactionsBlockSearch
+    Header
   },
   data: () => {
     return {
       transaction: {
-          hash: "",
-          confirmations: "",
-          fee: "",
-          sumOutputs: "",
-          size: ""
+        hash: "",
+        confirmations: "",
+        fee: "",
+        sumOutputs: "",
+        size: ""
       },
       block: {
-          hash: "",
-          height: "",
-          timestamp: ""
+        hash: "",
+        height: "",
+        timestamp: ""
+      },
+      vOut: {
+        amount: "",
+        key: ""
+      },
+      vIn: {
+        amount: "",
+        key: ""
       }
-
     };
   },
   computed: {
-    searchData() {
-      return this.$store.state.getSearchData.searchData;
+    transactions() {
+      return this.$store.state.getOutputs.outputs;
     }
   },
   watch: {
-    searchData() {
-      const data = this.searchData;
-      this.supply = this.getReadableCoins(data.alreadyGeneratedCoins, 2);
-      this.height = this.localizeNumber(data.height);
+    transactions() {
+      const data = this.transactions;
+      this.block.hash = data.block.hash;
+      this.block.height = this.localizeNumber(data.block.height);
 
-      const dateTime = new Date(data.timestamp * 1000);
-      this.timestamp = dateTime.toGMTString();
+      const dateTime = new Date(data.block.timestamp * 1000);
+      this.block.timestamp = dateTime.toGMTString();
 
-      this.difficulty = this.localizeNumber(data.difficulty);
-      this.orphan = this.checkOrphan(data.orphan);
-      this.transactions = data.transactions.length;
-      this.totTransactions = this.localizeNumber(
-        data.alreadyGeneratedTransactions
+      this.transaction.hash = data.txDetails.hash;
+      this.transaction.sumOutputs = this.getReadableCoins(
+        data.txDetails.amount_out
       );
-      this.transactionSize = data.transactionsCumulativeSize;
-      this.blockSize = data.blockSize;
-      this.txsMedian = data.sizeMedian;
-      this.effectiveSizeMedian = this.localizeNumber(data.effectiveSizeMedian);
-      this.rewardPenalty = data.penalty;
-      this.baseReward = this.localizeNumber(data.baseReward);
-      this.totalFee = data.totalFeeAmount;
-      this.reward = this.localizeNumber(data.reward);
+      this.transaction.size = data.txDetails.size;
+      this.transaction.fee = data.txDetails.fee;
+      this.vOut.amount = data.tx.vout[0].amount;
+
+      const vOutArr = [];
+      for (let i = 0; i < data.tx.vout.length; i++) {
+        const vOut = {
+          key: data.tx.vout[i].target.data.key,
+          amount: this.getReadableCoins(data.tx.vout[i].amount, 2)
+        };
+
+        vOutArr.push(vOut);
+      }
+      this.vOut = vOutArr;
+
+      const vInArr = [];
+      for (let i = 0; i < data.tx.vin.length; i++) {
+        const vInput = {
+          key: data.tx.vin[i].value.k_image,
+          amount: this.getReadableCoins(data.tx.vin[i].value.amount, 2)
+        };
+        vInArr.push(vInput);
+      }
+      this.vIn = vInArr;
     }
   },
   methods: {
@@ -131,34 +192,104 @@ export default {
   background-color: $black;
 }
 
+.transactions {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 
-@media only screen and (max-width: 700px) {
+.result {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 5rem;
+
   .headline {
-    flex-direction: column;
-    width: 100%;
-    margin-top: 3rem;
     h1 {
-      align-self: flex-start;
-    }
+      font-size: 2.2rem;
+      color: $white;
+      margin: 1.4rem 0;
 
-    h2 {
-      width: 100%;
+      i {
+        font-size: 2.2rem;
+        margin-right: 1rem;
+      }
     }
   }
 
-  .search {
-    display: flex;
-    flex-direction: column;
-    width: 100vw;
-    padding: 2rem;
-  }
-
-  .content {
-    width: 100%;
+  .block {
+    margin: 2rem 0;
   }
 
   .stats {
+    p {
+      margin: 1rem 0;
+      word-break: break-all;
+    }
+  }
+
+  .table {
+    display: flex;
     flex-direction: column;
+    box-shadow: $boxShadow;
+    color: $white;
+    margin-top: 3rem;
+
+    .table-header {
+      display: flex;
+      background: $tableHeader;
+      height: 2.8rem;
+      padding: 0 0.7rem;
+      align-items: center;
+    }
+    .content {
+      padding: 2rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 30% 70%;
+
+      p {
+        padding-right: 0.5rem;
+      }
+
+      i {
+        padding-right: 1.5rem;
+      }
+    }
+
+    .hash {
+      font-size: 1.4rem;
+      word-break: break-all;
+    }
+
+    .outputs {
+      display: grid;
+      grid-template-columns: 30% 70%;
+
+      p {
+        margin: 1rem 0;
+        word-wrap: break-all;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .transactions {
+    padding: 2rem;
+    width: 100vw;
+  }
+
+
+ 
+
+  .stats {
+
+    i {
+      display: none;
+    }
   }
 }
 </style>

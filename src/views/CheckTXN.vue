@@ -231,7 +231,6 @@ export default {
 }
 
 @media only screen and (max-width: 700px) {
-
   .checkTXN {
     padding: 2rem;
     width: 100vw;

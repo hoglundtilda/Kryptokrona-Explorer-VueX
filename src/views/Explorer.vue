@@ -46,7 +46,6 @@ export default {
 .explorer {
   display: grid;
   width: 100%;
-  padding: 2rem;
   column-gap: 2rem;
   row-gap: 1rem;
   grid-template-areas: "head head" "stats graph" "transPool transPool" "recentBlocks recentBlocks";
@@ -81,6 +80,7 @@ export default {
   .explorer {
     grid-template-columns: 1fr;
     column-gap: 0;
+    padding: 2rem;
   }
 }
 </style>

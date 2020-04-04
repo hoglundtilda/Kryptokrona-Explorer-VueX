@@ -70,7 +70,6 @@ export default {
         };
         transactionsArr.push(transaction);
       }
-      console.log(transactionsArr)
       this.transactions = transactionsArr;
     },
   },

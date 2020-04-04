@@ -38,6 +38,8 @@
   color: $hashLinks;
   cursor: pointer;
   word-wrap: break-word;
+  word-break: break-all;
+
 }
 .hash-a:hover {
   color: $hashHover;

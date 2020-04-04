@@ -215,13 +215,10 @@ export default {
 .headline {
   width: 100%;
   display: flex;
-  align-items: center;
   align-items: flex-end;
-
   .search-headline {
     display: flex;
-    width: 100%;
-    margin-right: 2rem;
+    margin-right: 1rem;
     font-size: $defaultHeadlineSize;
     color: $menu;
     letter-spacing: 2px;
