@@ -218,6 +218,7 @@ export default {
 
   .stats {
     display: flex;
+    align-items: center;
     margin: 1rem 0;
 
     p {
@@ -225,7 +226,7 @@ export default {
     }
 
     i {
-      padding-right: 1.5rem;
+      padding-right: 1rem;
     }
   }
 }

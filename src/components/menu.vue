@@ -65,4 +65,17 @@ export default {
     }
   }
 }
+
+@media screen and (max-width: 1200px) {
+ i {
+   display: none;
+ }
+
+.menu nav {
+   margin: 0 2rem;
+
+}
+
+}
+
 </style>

@@ -15,34 +15,32 @@
       </div>
     </section>
     <section class="content">
-      <div class="stats">
+      <div class="stats s-amount">
         <i class="fas fa-money-bill-alt"></i>
         <p>Amount</p>
       </div>
-      <div class="stats">
+      <div class="stats s-fee">
         <i class="fas fa-tag"></i>
         <p>Fee</p>
       </div>
-      <div class="stats">
+      <div class="stats s-size">
         <i class="fas fa-archive"></i>
         <p>Size</p>
       </div>
-      <div class="stats">
+      <div class="stats s-hash">
         <i class="fas fa-paw"></i>
         <p>Hash</p>
       </div>
     </section>
-    <li
-      v-for="(transaction, index) in poolTransactions"
-      :key="index"
-      class="poolTransactions"
-    >
-      <p class="stats-dark">{{ transaction.amount_out }}</p>
-      <p class="stats-dark">{{ transaction.fee }}</p>
-      <p class="stats-dark">{{ transaction.size }}</p>
-      <a  class="hash-a">{{
+    <li v-for="(transaction, index) in poolTransactions" :key="index" class="poolTransactions">
+      <p class="stats-dark amount">{{ transaction.amount_out }}</p>
+      <p class="stats-dark fee">{{ transaction.fee }}</p>
+      <p class="stats-dark size">{{ transaction.size }}</p>
+      <a class="hash-a">
+        {{
         transaction.hash
-      }}</a>
+        }}
+      </a>
     </li>
   </div>
 </template>
@@ -52,14 +50,14 @@ export default {
   data: () => {
     return {
       show: false,
-      poolTransactions: "",
+      poolTransactions: ""
     };
   },
   computed: {
     getPoolTransactions() {
-      console.log(this.$store.state.getPoolTransactions.poolTransactions)
+      console.log(this.$store.state.getPoolTransactions.poolTransactions);
       return this.$store.state.getPoolTransactions.poolTransactions;
-    },
+    }
   },
   // **************************************************
 
@@ -75,12 +73,12 @@ export default {
           ),
           fee: this.getReadableCoins(this.getPoolTransactions[i].fee, 4, true),
           size: this.localizeNumber(this.getPoolTransactions[i].fee),
-          hash: this.getPoolTransactions[i].hash,
+          hash: this.getPoolTransactions[i].hash
         };
         poolTransactionsArr.push(transaction);
       }
       this.poolTransactions = poolTransactionsArr;
-    },
+    }
   },
   // **************************************************
 
@@ -98,10 +96,9 @@ export default {
     localizeNumber(number) {
       const numberFormatter = new Intl.NumberFormat("en-US"); // US formatting, force commas.
       return numberFormatter.format(number);
-    },
+    }
     // --------------------------------------------------
-
-  },
+  }
 };
 </script>
 
@@ -147,7 +144,10 @@ export default {
     row-gap: 1.8rem;
     grid-template-columns: 18% 18% 18% 46%;
 
-    .stats {
+    .s-amount,
+    .s-fee,
+    .s-size,
+    .s-hash {
       display: flex;
       align-items: center;
       i {
@@ -162,6 +162,29 @@ export default {
     display: grid;
     row-gap: 1.8rem;
     grid-template-columns: 18% 18% 18% 46%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .content {
+    grid-template-columns: 40% 30% 30% !important;
+
+    .s-hash {
+      display: none !important;
+      grid-area: 0;
+    }
+  }
+
+  .poolTransactions {
+    grid-template-columns: 40% 30% 30% !important;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "amount fee size" "hash hash hash" !important;
+    padding: 0.2rem 3.2rem !important;
+    row-gap: 0rem !important;
+
+    .hash-a {
+      grid-area: hash;
+    }
   }
 }
 </style>

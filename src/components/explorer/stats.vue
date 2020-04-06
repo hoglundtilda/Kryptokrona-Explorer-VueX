@@ -200,7 +200,7 @@ export default {
       this.$store.dispatch("fetchLiveStats");
       this.$store.dispatch("getLastBlock");
       this.$store.dispatch("getPoolTransactions");
-    }, 30000);
+    }, 60000);
   }
 };
 </script>

@@ -15,14 +15,9 @@
       </button>
       <!--  <div class="numb">
         <p>No</p>
-      </div> -->
+      </div>-->
       <!-- input binded to data: "input", will take input in method go()-->
-      <input
-        @keyup.enter="go"
-        v-model="input"
-        type="text"
-        placeholder="Height (numbers only)"
-      />
+      <input @keyup.enter="go" v-model="input" type="text" placeholder="Height (numbers only)" />
       <button @click="go" class="btn">Go</button>
       <button @click="olderBlocks" class="btn">
         Older
@@ -61,9 +56,11 @@
         <li v-for="(block, index) in blocks" :key="index" class="block-content">
           <p class="stats-dark">{{ block.height }}</p>
           <p class="stats-dark">{{ block.size }}</p>
-          <a @click="searchByHash(block.hash)" class="hash-a">{{
+          <a @click="searchByHash(block.hash)" class="hash-a">
+            {{
             block.hash
-          }}</a>
+            }}
+          </a>
           <p class="stats-dark">{{ block.difficulty }}</p>
           <p class="stats-dark">{{ block.txs }}</p>
           <p class="stats-dark">{{ block.date }}</p>
@@ -81,13 +78,13 @@ export default {
   data: () => {
     return {
       input: "",
-      blocks: [],
+      blocks: []
     };
   },
   computed: {
     recentBlocks() {
       return this.$store.state.getBlocksData.recentBlocks;
-    },
+    }
   },
   // **************************************************
 
@@ -102,12 +99,12 @@ export default {
           hash: this.recentBlocks[i].hash,
           difficulty: this.localizeNumber(this.recentBlocks[i].difficulty),
           txs: this.recentBlocks[i].tx_count,
-          date: dateTime.toGMTString(),
+          date: dateTime.toGMTString()
         };
         recentBlocksArr.push(block);
       }
       this.blocks = recentBlocksArr;
-    },
+    }
   },
   // **************************************************
 
@@ -136,8 +133,8 @@ export default {
     localizeNumber(number) {
       const numberFormatter = new Intl.NumberFormat("en-US");
       return numberFormatter.format(number);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -214,11 +211,13 @@ export default {
 
   .content {
     padding: 2rem 2rem;
+    margin-top: 2rem;
 
     .stats-grid {
       display: grid;
       width: 100%;
-      grid-template-columns: 8% 8% 48% 10% 6% 18%;
+      margin-bottom: 1rem;
+      grid-template-columns: 8% 8% 48% 10% 6% 20%;
     }
     .stats {
       display: flex;
@@ -228,7 +227,7 @@ export default {
       }
 
       i {
-        padding-right: 1.5rem;
+        padding-right: 1rem;
       }
     }
   }
@@ -241,7 +240,7 @@ export default {
     .block-content {
       display: grid;
       width: 100%;
-      grid-template-columns: 8% 8% 48% 10% 6% 18%;
+      grid-template-columns: 8% 8% 48% 10% 6% 20%;
       margin: 0.8rem 0;
 
       .hash-a {
