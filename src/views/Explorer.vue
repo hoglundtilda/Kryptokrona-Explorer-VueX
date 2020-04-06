@@ -78,9 +78,11 @@ export default {
 
 @media only screen and (max-width: 700px) {
   .explorer {
-    grid-template-columns: 1fr;
-    column-gap: 0;
+    display: flex;
+    flex-direction: column;
     padding: 2rem;
   }
+
+
 }
 </style>
