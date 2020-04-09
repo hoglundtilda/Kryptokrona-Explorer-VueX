@@ -7,6 +7,7 @@ const searchData = {
   mutations: {
     blockByHash_or_id(state, data) {
       state.searchData = data.result.block;
+      localStorage.setItem("block", JSON.stringify(state.searchData))
     },
     blockTransaction(state, data) {
       state.blockTransactions = data;
@@ -53,6 +54,7 @@ const searchData = {
         .then(response => response.json())
         .then(data => {
           if (data) {
+            console.log(data)
             this.dispatch("getBlockByHash_or_id", data.result.block_header.hash)
           }
         });

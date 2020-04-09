@@ -1,9 +1,8 @@
 <template>
-<div class="table">
+  <div class="table">
     <section class="table-header">
       <i class="fas fa-exchange-alt"></i>
       <h2>Transactions</h2>
-      
     </section>
     <section class="content">
       <div class="stats">
@@ -23,17 +22,15 @@
         <p>Hash</p>
       </div>
     </section>
-    <li
-      v-for="(transaction, index) in transactions"
-      :key="index"
-      class="poolTransactions"
-    >
+    <li v-for="(transaction, index) in transactions" :key="index" class="poolTransactions">
       <p class="stats-dark">{{ transaction.amount_out }}</p>
       <p class="stats-dark">{{ transaction.fee }}</p>
       <p class="stats-dark">{{ transaction.size }}</p>
-      <a @click="getOutputs(transaction.hash)" class="hash-a">{{
+      <a @click="getOutputs(transaction.hash)" class="hash-a">
+        {{
         transaction.hash
-      }}</a>
+        }}
+      </a>
     </li>
   </div>
 </template>
@@ -46,36 +43,30 @@ export default {
       transactions: []
     };
   },
-  computed: {
-    getTransactions() {
-
-      return this.$store.state.getSearchData.searchData.transactions;
-    },
-  },
+  computed: {},
   // **************************************************
 
-  watch: {
-    getTransactions() {
+  watch: {},
+  // **************************************************
+
+  methods: {
+    getTransactions(transactions) {
       const transactionsArr = [];
-      for (let i = 0; i < this.getTransactions.length; i++) {
+      for (let i = 0; i < transactions.length; i++) {
         const transaction = {
           amount_out: this.getReadableCoins(
-            this.getTransactions[i].amount_out,
+            transactions[i].amount_out,
             4,
             true
           ),
-          fee: this.getReadableCoins(this.getTransactions[i].fee, 4, true),
-          size: this.localizeNumber(this.getTransactions[i].fee),
-          hash: this.getTransactions[i].hash,
+          fee: this.getReadableCoins(transactions[i].fee, 4, true),
+          size: this.localizeNumber(transactions[i].fee),
+          hash: transactions[i].hash
         };
         transactionsArr.push(transaction);
       }
       this.transactions = transactionsArr;
     },
-  },
-  // **************************************************
-
-  methods: {
     getReadableCoins(coins, digits) {
       const coinUnits = 100; // enter in the amount of atomic units in 1 coin, eg. 100 shells = 1 trtl
 
@@ -91,11 +82,15 @@ export default {
       return numberFormatter.format(number);
     },
     // --------------------------------------------------
-getOutputs(hash) {
-  this.$store.dispatch("getOutputs", hash)
-  this.$router.push("blockchain_transaction")
-}
+    getOutputs(hash) {
+      this.$store.dispatch("getOutputs", hash);
+      this.$router.push("blockchain_transaction");
+    }
   },
+  mounted() {
+    const transactions = JSON.parse(localStorage.getItem("block"));
+    this.getTransactions(transactions.transactions);
+  }
 };
 </script>
 

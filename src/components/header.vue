@@ -10,6 +10,7 @@
     <Menu class="menu" />
     <div class="search">
       <input
+        @keyup.enter="search"
         v-model="searchInput"
         type="text"
         class="search-input"
@@ -47,10 +48,10 @@ export default {
         console.log("Wrong search input");
       }
     },
-     nav() {
-     this.$store.state.nav = true
+    nav() {
+      this.$store.state.nav = true;
     }
-  },
+  }
 };
 </script>
 
@@ -164,7 +165,6 @@ export default {
       width: 100%;
       .search-input {
         width: 100%;
-        
       }
     }
   }

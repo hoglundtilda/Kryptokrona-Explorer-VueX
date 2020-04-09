@@ -10,7 +10,7 @@
           <h1 class="search-headline">
             <i class="fas fa-cube"></i>Block
           </h1>
-          <h2 class="hash-a">{{ searchData.hash }}</h2>
+          <h2 class="hash-a">{{ hash }}</h2>
         </div>
         <section class="content">
           <section class="left">
@@ -117,6 +117,7 @@ export default {
   },
   data: () => {
     return {
+      hash: "",
       supply: "",
       height: "",
       timestamp: "",
@@ -135,14 +136,10 @@ export default {
       reward: ""
     };
   },
-  computed: {
-    searchData() {
-      return this.$store.state.getSearchData.searchData;
-    }
-  },
-  watch: {
-    searchData() {
-      const data = this.searchData;
+  computed: {},
+  methods: {
+    searchData(data) {
+      this.hash = data.hash;
       this.supply = this.getReadableCoins(data.alreadyGeneratedCoins, 2);
       this.height = this.localizeNumber(data.height);
 
@@ -163,9 +160,7 @@ export default {
       this.baseReward = this.localizeNumber(data.baseReward);
       this.totalFee = data.totalFeeAmount;
       this.reward = this.localizeNumber(data.reward);
-    }
-  },
-  methods: {
+    },
     localizeNumber(number) {
       const numberFormatter = new Intl.NumberFormat("en-US");
       return numberFormatter.format(number);
@@ -184,6 +179,9 @@ export default {
         return "NO";
       }
     }
+  },
+  mounted() {
+    this.searchData(JSON.parse(localStorage.getItem("block")));
   }
 };
 </script>
