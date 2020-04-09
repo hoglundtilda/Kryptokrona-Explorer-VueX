@@ -120,6 +120,10 @@ export default {
   watch: {
     transactions() {
       const data = this.transactions;
+
+      let confirmations = JSON.parse(localStorage.getItem("lastHeight"));
+      this.transaction.confirmations = confirmations - data.block.height;
+
       this.block.hash = data.block.hash;
       this.block.height = this.localizeNumber(data.block.height);
 
@@ -282,11 +286,7 @@ export default {
     width: 100vw;
   }
 
-
- 
-
   .stats {
-
     i {
       display: none;
     }

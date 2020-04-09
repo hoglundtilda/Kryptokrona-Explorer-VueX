@@ -26,6 +26,7 @@ const blocksData = {
     },
     liveStats(state, data) {
       state.height = data.height;
+      localStorage.setItem("lastHeight", JSON.stringify(data.height))
       state.transactions = data.tx_count;
       state.difficulty = data.difficulty;
     }

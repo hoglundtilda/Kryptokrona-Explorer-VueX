@@ -17,8 +17,8 @@
         <p>No</p>
       </div>-->
       <!-- input binded to data: "input", will take input in method go()-->
-      <input @keyup.enter="go" v-model="input" type="text" placeholder="Height (numbers only)" />
-      <button @click="go" class="btn">Go</button>
+      <input @keyup.enter="searchGo" v-model="input" type="text" placeholder="Height (numbers only)" />
+      <button @click="searchGo" class="btn">Go</button>
       <button @click="olderBlocks" class="btn">
         Older
         <i class="fas fa-arrow-right"></i>
@@ -109,7 +109,7 @@ export default {
   // **************************************************
 
   methods: {
-    go() {
+    searchGo() {
       // search with height
       const height = parseInt(this.input);
       this.$store.dispatch("getRecentBlocks", height);
