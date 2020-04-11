@@ -142,7 +142,7 @@ export default {
     padding: 2rem 3.2rem;
     display: grid;
     row-gap: 1.8rem;
-    grid-template-columns: 18% 18% 18% 46%;
+    grid-template-columns: 15% 15% 15% 55%;
 
     .s-amount,
     .s-fee,
@@ -161,7 +161,7 @@ export default {
     padding: 2rem 3.2rem;
     display: grid;
     row-gap: 1.8rem;
-    grid-template-columns: 18% 18% 18% 46%;
+    grid-template-columns: 15% 15% 15% 55%;
   }
 }
 

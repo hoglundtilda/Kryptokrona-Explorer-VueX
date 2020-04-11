@@ -6,7 +6,7 @@
     <div class="explorer">
       <Header class="header" />
       <Stats class="stats" />
-      <Graph class="graph" />
+      <Chart class="graph" />
       <Transaction-Pool class="transaction-pool" />
       <RecentBlocks class="recent-blocks" />
     </div>
@@ -16,14 +16,14 @@
 <script>
 import Header from "../components/header";
 import Stats from "../components/explorer/stats";
-import Graph from "../components/explorer/graph";
+import Chart from "../components/explorer/chart";
 import TransactionPool from "../components/explorer/transactionPool";
 import RecentBlocks from "../components/explorer/recentBlocks";
 import NavOverlay from "../components/navOverlay";
 
 export default {
   name: "Explorer",
-  components: { Header, Stats, Graph, TransactionPool, RecentBlocks, NavOverlay },
+  components: { Header, Stats, Chart, TransactionPool, RecentBlocks, NavOverlay },
   data: () => {
     return {};
   },
