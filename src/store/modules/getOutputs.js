@@ -4,7 +4,6 @@ const outputs = {
   },
   mutations: {
     renderOutputs(state, data) {
-      console.log(data.result)
       state.outputs = data.result
 
     }

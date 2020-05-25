@@ -10,8 +10,8 @@ export default (arr, { minX, minY, maxX, maxY }, max, min, maxAmount) => {
       y:
         maxY -
         (value - minValue) * gridY +
-        +(index === maxAmount - 1) * 0.00001 -
-        +(index === 0) * 0.00001
+        +(index === maxAmount - 1) * 1 -
+        +(index === 0) * 1
     };
   });
 };

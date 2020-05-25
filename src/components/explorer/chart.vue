@@ -3,7 +3,8 @@
     <section class="table-header">
       <i class="fas fa-chart-area"></i>
       <h2>Chart</h2>
-      <div @mouseenter="show = true" @mouseleave="show = false" class="info">
+      <div  class="info">
+        <!-- @mouseenter="show = true" @mouseleave="show = false" -->
         <div v-if="show" class="info-text">
           <p>
             Difficulty based on last blocks from the list below. Block size,
@@ -47,7 +48,6 @@
 
 <script>
 import TrendChart from "../chart/trend-chart";
-
 export default {
   components: {
     TrendChart
@@ -57,20 +57,20 @@ export default {
       show: false,
       datasets: [
         {
-          data: [70, 100, 400, 180, 100, 300, 500],
+          data: [],
           smooth: true,
           showPoints: true,
           fill: true,
           className: "curve1"
         },
         {
-          data: [150, 300, 350, 100, 350, 100, 15],
+          data: [],
           smooth: true,
           showPoints: true,
           className: "curve2"
         },
         {
-          data: [50, 150, 200, 50, 120, 250, 200],
+          data: [],
           smooth: true,
           showPoints: true,
           className: "curve3"
@@ -91,12 +91,33 @@ export default {
     };
   },
   computed: {
-    chartData() {
+    recentData() {
+      console.log(this.$store.state.getBlocksData.recentBlocks);
       return this.$store.state.getBlocksData.recentBlocks;
     }
   },
+  watch: {
+    recentData() {
+      const height = [];
+      const transactions = [];
+      const difficulty = [];
+      console.log(this.recentData);
+      for (let i = 0; i < this.recentData.length; i++) {
+        height.push(this.recentData[i].height);
+        transactions.push(this.recentData[i].tx_count);
+        difficulty.push(this.recentData[i].difficulty);
+      }
+      this.datasets[0].data = height;
+      this.datasets[1].data = transactions;
+      this.datasets[2].data = difficulty;
+      console.log("height " + height);
+      console.log("transactions " + transactions);
+      console.log("diff " + difficulty);
+    }
+  },
+
   methods: {
-    initPopper() {
+    /* initPopper() {
       const chart = document.querySelector(".random-chart");
       const ref = chart.querySelector(".active-line");
       const tooltip = this.$refs.tooltip;
@@ -109,7 +130,7 @@ export default {
           }
         }
       });
-    },
+    }, */
     onMouseMove(params) {
       this.popperIsActive = !!params;
       this.popper.scheduleUpdate();
@@ -118,7 +139,6 @@ export default {
   },
   created() {
     this.$store.dispatch("fetchLiveStats");
-    console.log("here" + this.$store.state.getBlocksData.recentBlocks);
   },
   mounted() {
     this.initPopper();

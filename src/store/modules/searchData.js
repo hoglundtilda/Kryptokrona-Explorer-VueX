@@ -54,7 +54,6 @@ const searchData = {
         .then(response => response.json())
         .then(data => {
           if (data) {
-            console.log(data)
             this.dispatch("getBlockByHash_or_id", data.result.block_header.hash)
           }
         });

@@ -2,7 +2,7 @@
   <div class="table">
     <section class="table-header">
       <i class="fas fa-exchange-alt"></i>
-      <h2>Transaction Pool</h2>
+      <h2>Transaction Pool ({{poolTransactions.length}})</h2>
       <div @mouseenter="show = true" @mouseleave="show = false" class="info">
         <div v-if="show" class="info-text">
           <p>
@@ -55,7 +55,6 @@ export default {
   },
   computed: {
     getPoolTransactions() {
-      console.log(this.$store.state.getPoolTransactions.poolTransactions);
       return this.$store.state.getPoolTransactions.poolTransactions;
     }
   },
