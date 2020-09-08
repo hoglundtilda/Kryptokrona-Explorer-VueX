@@ -1,8 +1,5 @@
 <template>
   <div>
-    <transition name="fade">
-      <NavOverlay v-if="this.$store.state.nav" @closeNav="nav" class="nav-overlay" />
-    </transition>
     <div class="transactions">
       <Header class="header" />
       <section class="result">
@@ -80,12 +77,10 @@
 </template>
 
 <script>
-import NavOverlay from "../components/navOverlay";
-import Header from "../components/header";
+import Header from "../components/Header";
 
 export default {
   components: {
-    NavOverlay,
     Header
   },
   data: () => {
@@ -291,5 +286,7 @@ export default {
       display: none;
     }
   }
+
+
 }
 </style>

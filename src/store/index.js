@@ -10,7 +10,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    nav: false,
     api: "http://explorer.kryptokrona.se:11898"
 
   },

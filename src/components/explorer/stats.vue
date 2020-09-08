@@ -5,8 +5,8 @@
       <h2>Stats</h2>
     </section>
     <section class="content">
-      <section class="left">
-        <div class="stats">
+      <section class="first">
+<div class="stats">
           <i class="fas fa-bars"></i>
           <p>Height:</p>
           <p>{{ networkHeight }}</p>
@@ -22,7 +22,10 @@
           <p>{{ reward }}</p>
           <p>XKR</p>
         </div>
-        <div class="stats">
+      </section>
+        <section class="second">
+
+ <div class="stats">
           <i class="fas fa-certificate"></i>
           <p>Supply:</p>
           <p>{{ supply }}</p>
@@ -34,15 +37,16 @@
           <p>{{ emissionPercent }}</p>
           <p>%</p>
         </div>
-      </section>
-      <section class="right">
+      
         <div class="stats">
           <i class="fas fa-unlock"></i>
           <p>Difficulty:</p>
           <p>{{ networkDifficulty }}</p>
           <p>M</p>
         </div>
-        <div class="stats">
+        </section>
+       <section class="third">
+  <div class="stats">
           <i class="fas fa-lock"></i>
           <p>Avarage Difficulty:</p>
           <p>{{ avarageDifficulty }}</p>
@@ -57,7 +61,9 @@
           <p>Avarage Hash Rate:</p>
           <p>{{ avarageHashrate }}</p>
         </div>
-      </section>
+
+       </section>
+      
     </section>
   </div>
 </template>
@@ -234,6 +240,7 @@ export default {
     padding: 2rem 2rem;
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 
     .left,
