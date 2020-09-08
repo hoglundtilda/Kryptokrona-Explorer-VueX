@@ -1,8 +1,6 @@
 <template>
   <div>
-    <transition name="fade">
-      <NavOverlay v-if="this.$store.state.nav" @closeNav="nav" class="nav-overlay" />
-    </transition>
+
     <div class="search">
       <Header class="header" />
       <section class="result">
@@ -105,13 +103,11 @@
 </template>
 
 <script>
-import NavOverlay from "../components/navOverlay";
-import Header from "../components/header";
-import TransactionsBlockSearch from "../components/explorer/search/transactionsBlockSearch";
+import Header from "../components/Header";
+import TransactionsBlockSearch from "../components/explorer/search/TransactionsBlockSearch";
 
 export default {
   components: {
-    NavOverlay,
     Header,
     TransactionsBlockSearch
   },
@@ -238,7 +234,7 @@ export default {
 
 .content {
   padding: 2rem 0;
-  width: 55%;
+
   display: flex;
   justify-content: space-between;
 
@@ -288,10 +284,11 @@ export default {
 
   .content {
     width: 100%;
+    flex-direction: column;
   }
 
   .stats {
-    flex-direction: column;
+    flex-direction: row;
   }
 }
 </style>

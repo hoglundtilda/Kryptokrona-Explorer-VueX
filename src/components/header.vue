@@ -1,13 +1,8 @@
 <template>
   <div class="header">
-    <div class="img">
+    <div @click="goToHome" class="img">
       <img src="../assets/logo-text-light-new.svg" alt="kryptokrona logo" />
-      <div @click="nav" class="hamburger">
-        <i class="fas fa-bars"></i>
-      </div>
     </div>
-
-    <Menu class="menu" />
     <div class="search">
       <input
         @keyup.enter="search"
@@ -24,12 +19,8 @@
 </template>
 
 <script>
-import Menu from "./menu.vue";
 
 export default {
-  components: {
-    Menu
-  },
   data: () => {
     return {
       searchInput: ""
@@ -48,8 +39,12 @@ export default {
         console.log("Wrong search input");
       }
     },
-    nav() {
-      this.$store.state.nav = true;
+    goToHome() {
+      if(this.$route.path === "/"){
+        location.reload();
+      } else {
+        this.$router.push("/")
+      }
     }
   }
 };

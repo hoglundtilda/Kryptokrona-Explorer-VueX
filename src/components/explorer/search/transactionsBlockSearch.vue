@@ -17,15 +17,15 @@
         <i class="fas fa-archive"></i>
         <p>Size</p>
       </div>
-      <div class="stats">
+      <div class="stats hash-stats">
         <i class="fas fa-paw"></i>
         <p>Hash</p>
       </div>
     </section>
     <li v-for="(transaction, index) in transactions" :key="index" class="poolTransactions">
-      <p class="stats-dark">{{ transaction.amount_out }}</p>
-      <p class="stats-dark">{{ transaction.fee }}</p>
-      <p class="stats-dark">{{ transaction.size }}</p>
+      <p class="stats-dark stats1">{{ transaction.amount_out }}</p>
+      <p class="stats-dark stats2">{{ transaction.fee }}</p>
+      <p class="stats-dark stats3">{{ transaction.size }}</p>
       <a @click="getOutputs(transaction.hash)" class="hash-a">
         {{
         transaction.hash
@@ -153,4 +153,49 @@ export default {
     grid-template-columns: 18% 18% 18% 42%;
   }
 }
+
+@media only screen and (max-width: 700px) {
+
+.content {
+  grid-template-columns: 1fr 1fr 1fr !important;
+  .hash-stats {
+    display: none !important;
+  }
+}
+  
+  .poolTransactions {
+    row-gap: 1.8rem;
+    grid-template-columns: 1fr 1fr 1fr !important;
+    grid-template-rows: auto auto !important;
+    grid-template-areas:
+    "stats1 stats2 stats3"
+    "hash hash hash" ;
+
+    .stats1 {
+    grid-area: stats1;
+  }
+
+  .stats2 {
+    grid-area: stats2;
+  }
+
+  .stats3 {
+    grid-area: stats3;
+  }
+
+  .stats4, .hash-a {
+    grid-area: hash;
+    column-span: all !important;
+    word-break:keep-all;
+  }
+
+  .hash-stats {
+    display: none !important;
+  }
+  }
+
+  
+}
+
+
 </style>
