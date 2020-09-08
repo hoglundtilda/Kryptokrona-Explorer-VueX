@@ -12,9 +12,9 @@
 
 <script>
 import Header from "../components/Header";
-import Stats from "../components/explorer/stats";
-import TransactionPool from "../components/explorer/transactionPool";
-import RecentBlocks from "../components/explorer/recentBlocks";
+import Stats from "../components/explorer/Stats";
+import TransactionPool from "../components/explorer/TransactionPool";
+import RecentBlocks from "../components/explorer/RecentBlocks";
 
 export default {
   name: "Explorer",
