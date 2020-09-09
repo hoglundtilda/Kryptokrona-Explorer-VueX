@@ -17,6 +17,7 @@ const outputs = {
           jsonrpc: '2.0',
           id: 'test',
           method: 'f_transaction_json',
+          mode: "no-cors",
           params: {
             hash: hash,
           },

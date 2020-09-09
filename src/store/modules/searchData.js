@@ -21,6 +21,7 @@ const searchData = {
           jsonrpc: '2.0',
           id: 'GetSearchBlock',
           method: 'f_block_json',
+          mode: "no-cors",
           params: {
             hash: hash,
           },
@@ -47,6 +48,7 @@ const searchData = {
           jsonrpc: '2.0',
           id: 'blockbyheight',
           method: 'getblockheaderbyheight',
+          mode: "no-cors",
           params: {
             height: parseInt(height),
           },
@@ -75,6 +77,7 @@ const searchData = {
           jsonrpc: '2.0',
           id: 'test',
           method: 'f_transaction_json',
+          mode: "no-cors",
           params: {
             hash: hash,
           },

@@ -16,6 +16,7 @@ const poolTransactions = {
           jsonrpc: '2.0',
           id: 'test',
           method: 'f_on_transactions_pool_json',
+          mode: "no-cors",
           params: {},
         }),
         dataType: 'text',
