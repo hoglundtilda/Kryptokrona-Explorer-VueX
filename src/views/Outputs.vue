@@ -81,7 +81,7 @@ import Header from "../components/Header";
 
 export default {
   components: {
-    Header
+    Header,
   },
   data: () => {
     return {
@@ -90,27 +90,27 @@ export default {
         confirmations: "",
         fee: "",
         sumOutputs: "",
-        size: ""
+        size: "",
       },
       block: {
         hash: "",
         height: "",
-        timestamp: ""
+        timestamp: "",
       },
       vOut: {
         amount: "",
-        key: ""
+        key: "",
       },
       vIn: {
         amount: "",
-        key: ""
-      }
+        key: "",
+      },
     };
   },
   computed: {
     transactions() {
       return this.$store.state.getOutputs.outputs;
-    }
+    },
   },
   watch: {
     transactions() {
@@ -137,7 +137,7 @@ export default {
       for (let i = 0; i < data.tx.vout.length; i++) {
         const vOut = {
           key: data.tx.vout[i].target.data.key,
-          amount: this.getReadableCoins(data.tx.vout[i].amount, 2)
+          amount: this.getReadableCoins(data.tx.vout[i].amount, 2),
         };
 
         vOutArr.push(vOut);
@@ -148,12 +148,12 @@ export default {
       for (let i = 0; i < data.tx.vin.length; i++) {
         const vInput = {
           key: data.tx.vin[i].value.k_image,
-          amount: this.getReadableCoins(data.tx.vin[i].value.amount, 2)
+          amount: this.getReadableCoins(data.tx.vin[i].value.amount, 2),
         };
         vInArr.push(vInput);
       }
       this.vIn = vInArr;
-    }
+    },
   },
   methods: {
     localizeNumber(number) {
@@ -173,8 +173,8 @@ export default {
       } else {
         return "NO";
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -194,7 +194,7 @@ export default {
 .transactions {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 80vw;
 }
 
 .result {
@@ -286,7 +286,5 @@ export default {
       display: none;
     }
   }
-
-
 }
 </style>

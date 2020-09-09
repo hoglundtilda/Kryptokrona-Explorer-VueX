@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div class="explorer">
       <Header class="header" />
       <Stats class="stats" />
@@ -22,7 +21,7 @@ export default {
   data: () => {
     return {};
   },
-  methods: {}
+  methods: {},
 };
 </script>
 
@@ -40,7 +39,8 @@ export default {
 
 .explorer {
   display: grid;
-  width: 100%;
+  width: 80vw;
+  margin: 0 10em;
   column-gap: 2rem;
   row-gap: 1rem;
   grid-template-areas: "head head" "stats stats" "transPool transPool" "recentBlocks recentBlocks";
@@ -77,7 +77,5 @@ export default {
     flex-direction: column;
     padding: 2rem;
   }
-
-
 }
 </style>

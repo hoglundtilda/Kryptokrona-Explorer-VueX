@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div class="search">
       <Header class="header" />
       <section class="result">
@@ -109,7 +108,7 @@ import TransactionsBlockSearch from "../components/explorer/search/TransactionsB
 export default {
   components: {
     Header,
-    TransactionsBlockSearch
+    TransactionsBlockSearch,
   },
   data: () => {
     return {
@@ -129,7 +128,7 @@ export default {
       rewardPenalty: "",
       baseReward: "",
       totalFee: "",
-      reward: ""
+      reward: "",
     };
   },
   computed: {},
@@ -174,11 +173,11 @@ export default {
       } else {
         return "NO";
       }
-    }
+    },
   },
   mounted() {
     this.searchData(JSON.parse(localStorage.getItem("block")));
-  }
+  },
 };
 </script>
 
@@ -197,7 +196,7 @@ export default {
 
 .search {
   display: grid;
-  width: 100%;
+  width: 80vw;
   column-gap: 2rem;
   row-gap: 1rem;
 }
