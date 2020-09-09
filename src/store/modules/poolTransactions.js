@@ -1,6 +1,5 @@
 const poolTransactions = {
   state: {
-    api: 'https://explorer.kryptokrona.se:11898',
     poolTransactions: '',
   },
   mutations: {
@@ -10,7 +9,7 @@ const poolTransactions = {
   },
   actions: {
     getPoolTransactions(ctx) {
-      const url = this.state.getPoolTransactions.api + '/json_rpc';
+      const url = this.state.api + '/json_rpc';
       fetch(url, {
         method: 'POST',
         body: JSON.stringify({

@@ -9,7 +9,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    api: 'https://explorer.kryptokrona.se:11898',
+    api: 'http://explorer.kryptokrona.se:11898',
   },
   mutations: {},
 

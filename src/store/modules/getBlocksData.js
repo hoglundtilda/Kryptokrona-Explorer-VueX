@@ -1,6 +1,5 @@
 const blocksData = {
   state: {
-    api: 'https://explorer.kryptokrona.se:11898',
     recentBlocks: '',
     alreadyGeneratedCoins: '',
     baseReward: '',
@@ -34,7 +33,7 @@ const blocksData = {
   actions: {
     async getRecentBlocks(ctx, height) {
       const currHeight = height;
-      const url = this.state.getBlocksData.api + '/json_rpc';
+      const url = this.state.api + '/json_rpc';
       fetch(url, {
         method: 'POST',
         body: JSON.stringify({
@@ -58,7 +57,7 @@ const blocksData = {
         });
     },
     async getLastBlock(ctx) {
-      const url = this.state.getBlocksData.api + '/json_rpc';
+      const url = this.state.api + '/json_rpc';
       fetch(url, {
         method: 'POST',
         body: JSON.stringify({
@@ -73,7 +72,7 @@ const blocksData = {
         .then((data) => {
           if (data) {
             const lastBlockHash = data.result.block_header.hash;
-            const url = this.state.getBlocksData.api + '/json_rpc';
+            const url = this.state.api + '/json_rpc';
             fetch(url, {
               method: 'POST',
               body: JSON.stringify({
@@ -103,7 +102,7 @@ const blocksData = {
     fetchLiveStats(ctx) {
       ctx.commit('clearState');
 
-      const url = this.state.getBlocksData.api + '/getinfo';
+      const url = this.state.api + '/getinfo';
       fetch(url, {
         method: 'GET',
         dataType: 'json',

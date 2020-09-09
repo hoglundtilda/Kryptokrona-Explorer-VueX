@@ -1,6 +1,5 @@
 const searchData = {
   state: {
-    api: 'https://explorer.kryptokrona.se:11898',
     searchData: '',
     blockTransactions: '',
   },
@@ -15,7 +14,7 @@ const searchData = {
   },
   actions: {
     getBlockByHash_or_id(ctx, hash) {
-      const url = this.state.getSearchData.api + '/json_rpc';
+      const url = this.state.api + '/json_rpc';
       fetch(url, {
         method: 'POST',
         body: JSON.stringify({
@@ -33,12 +32,15 @@ const searchData = {
           if (data) {
             ctx.commit('blockByHash_or_id', data);
           }
+        })
+        .catch((error) => {
+          console.error(error);
         });
     },
 
     // ---------------------------------
     getBlockByHeight(ctx, height) {
-      const url = this.state.getSearchData.api + '/json_rpc';
+      const url = this.state.api + '/json_rpc';
       fetch(url, {
         method: 'POST',
         body: JSON.stringify({
@@ -54,17 +56,19 @@ const searchData = {
         .then((response) => response.json())
         .then((data) => {
           if (data) {
-            console.log(data);
             this.dispatch(
               'getBlockByHash_or_id',
               data.result.block_header.hash
             );
           }
+        })
+        .catch((error) => {
+          console.error(error);
         });
     },
     // ---------------------------------
     getBlockTransaction(ctx, hash) {
-      const url = this.state.getSearchData.api + '/json_rpc';
+      const url = this.state.api + '/json_rpc';
       fetch(url, {
         method: 'POST',
         body: JSON.stringify({
@@ -82,6 +86,9 @@ const searchData = {
           if (data) {
             ctx.commit('blockTransaction', data);
           }
+        })
+        .catch((error) => {
+          console.error(error);
         });
     },
   },
