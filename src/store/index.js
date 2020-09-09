@@ -9,7 +9,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    api: 'http://explorer.kryptokrona.se:11898',
+    api: 'https://explorer.kryptokrona.se/api/json_rpc',
   },
   mutations: {},
 
