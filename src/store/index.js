@@ -1,17 +1,16 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-import blocksData from "./modules/getBlocksData";
-import poolTransactions from "./modules/poolTransactions";
-import searchData from "./modules/searchData";
-import outputs from "./modules/getOutputs";
+import blocksData from './modules/getBlocksData';
+import poolTransactions from './modules/poolTransactions';
+import searchData from './modules/searchData';
+import outputs from './modules/getOutputs';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    api: "http://explorer.kryptokrona.se:11898"
-
+    api: 'https://explorer.kryptokrona.se:11898',
   },
   mutations: {},
 
@@ -20,6 +19,6 @@ export default new Vuex.Store({
     getBlocksData: blocksData,
     getPoolTransactions: poolTransactions,
     getSearchData: searchData,
-    getOutputs: outputs
-  }
+    getOutputs: outputs,
+  },
 });
