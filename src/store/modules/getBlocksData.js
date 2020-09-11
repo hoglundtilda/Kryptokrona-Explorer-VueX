@@ -40,7 +40,6 @@ const blocksData = {
           jsonrpc: '2.0',
           id: 'test',
           method: 'f_blocks_list_json',
-          mode: "no-cors",
           params: {
             height: currHeight,
           },
@@ -65,7 +64,6 @@ const blocksData = {
           jsonrpc: '2.0',
           id: 'test',
           method: 'getlastblockheader',
-          mode: "no-cors",
           params: {},
         }),
         dataType: 'json',

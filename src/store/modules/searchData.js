@@ -21,7 +21,6 @@ const searchData = {
           jsonrpc: '2.0',
           id: 'GetSearchBlock',
           method: 'f_block_json',
-          mode: "no-cors",
           params: {
             hash: hash,
           },

@@ -9,7 +9,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    api: 'https://cors-anywhere.herokuapp.com/https://explorer.kryptokrona.se/api',
+    api: 'http://explorer.kryptokrona.se:11898',
   },
   mutations: {},
 
